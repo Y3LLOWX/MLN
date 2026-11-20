@@ -1,1 +1,1269 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>민루나 (Min Luna) | 제타체육회 피겨·발레부 공식 프로필</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-white: #ffffff;
+      --primary-blue: #3b82f6;
+      --ice-cyan: #38bdf8;
+      --zeta-purple: #6d28d9;
+      --zeta-purple-light: #ede9fe;
+      --blush-pink: #ec4899;
+      --blush-bg: #fdf2f8;
+      --xmas-red: #dc2626;
+      --xmas-gold: #eab308;
+      --xmas-pine: #15803d;
+      --text-dark: #1e293b;
+      --text-muted: #64748b;
+      --border-ice: rgba(148, 163, 184, 0.25);
+      --shadow-soft: 0 12px 32px rgba(30, 58, 138, 0.08);
+      --shadow-card: 0 8px 24px rgba(15, 23, 42, 0.06);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+    }
 
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(220, 38, 38, 0.08) 0%, transparent 32%),
+        radial-gradient(circle at 88% 14%, rgba(21, 128, 61, 0.08) 0%, transparent 34%),
+        linear-gradient(180deg, #e8f1fb 0%, #f8fafc 38%, #eef4fc 100%);
+      color: var(--text-dark);
+      line-height: 1.65;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* =========================================
+       메인 페이지 크리스마스 눈입자 배경 캔버스
+       ========================================= */
+    #snowCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .page-shell {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* 상단 네비게이션 바 */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-ice);
+    }
+
+    .nav-container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0.9rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-badge {
+      background: linear-gradient(135deg, var(--zeta-purple), #4f46e5);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--zeta-purple);
+    }
+
+    .nav-cta {
+      background: var(--zeta-purple);
+      color: #fff !important;
+      padding: 0.5rem 1.1rem;
+      border-radius: 999px;
+      font-weight: 700 !important;
+      font-size: 0.85rem !important;
+      box-shadow: 0 4px 12px rgba(109, 40, 217, 0.25);
+      transition: transform 0.2s, background 0.2s !important;
+      white-space: nowrap;
+    }
+
+    .nav-cta:hover {
+      background: #5b21b6;
+      transform: translateY(-1px);
+    }
+
+    /* 공통 컨테이너 */
+    main {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 5rem;
+    }
+
+    section {
+      margin-bottom: 4.5rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 2.25rem;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary-blue);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--text-dark);
+    }
+
+    /* 1. 히어로 섹션 (중앙 메인 이미지 MLN_ballet.png) */
+    .hero {
+      background: radial-gradient(circle at 50% 18%, #ffffff 0%, #e0f2fe 65%, #fef2f2 100%);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: var(--radius-lg);
+      padding: clamp(2rem, 4vw, 3.5rem) 1.5rem;
+      box-shadow: var(--shadow-soft);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-club-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid #fecdd3;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #be123c;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 5vw, 3.4rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+      color: #0284c7;
+      font-weight: 700;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-image-wrapper {
+      position: relative;
+      max-width: 440px;
+      width: 100%;
+      margin: 0 auto 1.75rem;
+      border-radius: 22px;
+      padding: 10px;
+      background: linear-gradient(135deg, #ffffff, #bae6fd, #fecdd3, #ddd6fe);
+      box-shadow: 0 20px 45px rgba(2, 132, 199, 0.18);
+    }
+
+    .hero-image-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 16px;
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
+      background-color: #dbeafe;
+    }
+
+    .hero-quote {
+      max-width: 540px;
+      margin: 0 auto 1.75rem;
+      background: rgba(255, 255, 255, 0.88);
+      border-left: 4px solid var(--xmas-red);
+      padding: 0.9rem 1.25rem;
+      border-radius: 0 12px 12px 0;
+      font-size: clamp(0.98rem, 2.2vw, 1.12rem);
+      font-weight: 600;
+      color: #334155;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.85rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, #6d28d9 0%, #4f46e5 100%);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.95rem 2rem;
+      border-radius: 999px;
+      box-shadow: 0 10px 25px rgba(109, 40, 217, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(109, 40, 217, 0.4);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      color: var(--text-dark);
+      border: 1px solid #cbd5e1;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.95rem 1.6rem;
+      border-radius: 999px;
+      transition: background 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: #f1f5f9;
+    }
+
+    /* 2. 프로필 & 발레 포즈 뷰어 + 칭찬하기 인터랙션 섹션 */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .visual-showcase {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border-ice);
+      text-align: center;
+    }
+
+    .pose-tabs {
+      display: flex;
+      gap: 0.5rem;
+      background: #f1f5f9;
+      padding: 0.35rem;
+      border-radius: 12px;
+      margin-bottom: 1.15rem;
+    }
+
+    .pose-tab {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 0.55rem 0.6rem;
+      border-radius: 9px;
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .pose-tab.active {
+      background: #ffffff;
+      color: var(--zeta-purple);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .pose-tab.blush-tab.active {
+      color: var(--blush-pink);
+      background: var(--blush-bg);
+    }
+
+    .standing-stage {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 25%, #ffffff 0%, #f0f9ff 100%);
+      border: 1px solid #e2e8f0;
+      transition: background 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .standing-stage.blush-stage {
+      background: radial-gradient(circle at 50% 35%, #fff1f2 0%, #fce7f3 65%, #fbcfe8 100%);
+      box-shadow: inset 0 0 24px rgba(236, 72, 153, 0.18);
+    }
+
+    .standing-stage img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.25s ease;
+    }
+
+    .standing-stage.blush-stage img {
+      animation: shyShake 0.45s ease;
+    }
+
+    @keyframes shyShake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-4px) rotate(-0.5deg); }
+      75% { transform: translateX(4px) rotate(0.5deg); }
+    }
+
+    /* 칭찬하기 인터랙션 패널 */
+    .praise-box {
+      margin-top: 1.15rem;
+      background: linear-gradient(135deg, #fdf2f8 0%, #f5f3ff 100%);
+      border: 1px solid #fbcfe8;
+      border-radius: 16px;
+      padding: 1rem;
+      text-align: left;
+    }
+
+    .praise-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.6rem;
+      gap: 0.5rem;
+    }
+
+    .praise-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #9d174d;
+    }
+
+    .praise-counter {
+      background: #ffffff;
+      color: var(--blush-pink);
+      border: 1px solid #f9a8d4;
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+    }
+
+    .praise-bubble {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 0.8rem 0.95rem;
+      margin-bottom: 0.8rem;
+      box-shadow: 0 2px 8px rgba(236, 72, 153, 0.08);
+      min-height: 68px;
+    }
+
+    .praise-emoji {
+      font-size: 1.5rem;
+      line-height: 1.2;
+      flex-shrink: 0;
+    }
+
+    .praise-dialogue {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #334155;
+      line-height: 1.5;
+    }
+
+    .btn-praise {
+      width: 100%;
+      border: none;
+      background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 800;
+      padding: 0.78rem 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(236, 72, 153, 0.25);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn-praise:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(236, 72, 153, 0.35);
+    }
+
+    .btn-praise:active {
+      transform: scale(0.98);
+    }
+
+    .profile-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.5rem, 3vw, 2.25rem);
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border-ice);
+    }
+
+    .profile-name-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.65rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .profile-name-row h3 {
+      font-size: 1.75rem;
+      font-weight: 900;
+    }
+
+    .nickname-badge {
+      background: #e0f2fe;
+      color: #0284c7;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+    }
+
+    .spec-table th,
+    .spec-table td {
+      padding: 0.65rem 0.5rem;
+      text-align: left;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 0.94rem;
+      vertical-align: top;
+    }
+
+    .spec-table th {
+      width: 95px;
+      color: var(--text-muted);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .spec-table td {
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+
+    .costume-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 1rem 1.15rem;
+    }
+
+    .costume-box h4 {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: #0369a1;
+      margin-bottom: 0.4rem;
+    }
+
+    .costume-box p {
+      font-size: 0.88rem;
+      color: #475569;
+      line-height: 1.55;
+    }
+
+    /* 3. 매력 포인트 카드 */
+    .traits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .trait-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border-ice);
+      transition: transform 0.2s;
+    }
+
+    .trait-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .trait-icon {
+      font-size: 1.65rem;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .trait-card h4 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin-bottom: 0.45rem;
+      color: var(--text-dark);
+    }
+
+    .trait-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* 4. 제타체육회 세계관 & 피날레 시그니처 */
+    .lore-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .lore-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.5rem, 3vw, 2rem);
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border-ice);
+    }
+
+    .lore-card.finale {
+      background: linear-gradient(145deg, #ffffff 0%, #f0f9ff 100%);
+      border: 1px solid #bae6fd;
+    }
+
+    .lore-label {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      margin-bottom: 0.75rem;
+      background: var(--zeta-purple-light);
+      color: var(--zeta-purple);
+    }
+
+    .lore-card.finale .lore-label {
+      background: #e0f2fe;
+      color: #0284c7;
+    }
+
+    .lore-card h3 {
+      font-size: 1.3rem;
+      font-weight: 900;
+      margin-bottom: 0.85rem;
+      line-height: 1.35;
+    }
+
+    .lore-card p {
+      font-size: 0.94rem;
+      color: #334155;
+      margin-bottom: 0.85rem;
+    }
+
+    .lore-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin-top: 0.75rem;
+    }
+
+    .lore-list li {
+      font-size: 0.9rem;
+      color: #475569;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+
+    .lore-list li::before {
+      content: "❄";
+      position: absolute;
+      left: 0;
+      color: var(--ice-cyan);
+      font-size: 0.8rem;
+    }
+
+    /* 5. ZTN NEWS 보도 섹션 (MLN_news.png) */
+    .news-section {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.5rem, 3.5vw, 2.5rem);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-ice);
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .news-image-box {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.14);
+      border: 1px solid #e2e8f0;
+    }
+
+    .news-image-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .news-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #dc2626;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 0.25rem 0.65rem;
+      border-radius: 4px;
+      margin-bottom: 0.85rem;
+      letter-spacing: 0.05em;
+    }
+
+    .news-content h3 {
+      font-size: clamp(1.35rem, 2.8vw, 1.8rem);
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .news-content p {
+      font-size: 0.95rem;
+      color: #475569;
+      margin-bottom: 1rem;
+    }
+
+    .news-meta {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding-top: 0.85rem;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    /* 6. 하단 제타 랩스 CTA 배너 */
+    .cta-banner {
+      background: linear-gradient(135deg, #311068 0%, #5b21b6 50%, #1d4ed8 100%);
+      color: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: clamp(2.25rem, 5vw, 3.5rem) 1.5rem;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(79, 70, 229, 0.25);
+    }
+
+    .cta-banner .labs-tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .cta-banner h2 {
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      font-weight: 900;
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .cta-banner p {
+      max-width: 560px;
+      margin: 0 auto 1.75rem;
+      color: #e0e7ff;
+      font-size: 0.98rem;
+    }
+
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #ffffff;
+      color: #4c1d95;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.02rem;
+      padding: 1rem 2.25rem;
+      border-radius: 999px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s;
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem 3rem;
+      color: var(--text-muted);
+      font-size: 0.84rem;
+    }
+
+    /* =========================================
+       반응형 미디어 쿼리 (태블릿 & 모바일 최적화)
+       ========================================= */
+    @media (max-width: 900px) {
+      .profile-grid,
+      .lore-wrapper,
+      .news-section {
+        grid-template-columns: 1fr;
+      }
+
+      .traits-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .visual-showcase {
+        max-width: 480px;
+        margin: 0 auto;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links a:not(.nav-cta) {
+        display: none;
+      }
+
+      .nav-container {
+        padding: 0.75rem 1rem;
+      }
+
+      .brand {
+        font-size: 0.95rem;
+      }
+
+      main {
+        padding: 1.25rem 1rem 3.5rem;
+      }
+
+      section {
+        margin-bottom: 3rem;
+      }
+
+      .hero {
+        padding: 1.75rem 1rem;
+        border-radius: 20px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn-primary,
+      .btn-secondary,
+      .btn-white {
+        width: 100%;
+      }
+
+      .pose-tab {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.35rem;
+      }
+
+      .traits-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .spec-table th {
+        width: 82px;
+        font-size: 0.88rem;
+      }
+
+      .spec-table td {
+        font-size: 0.88rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 크리스마스 눈입자 배경 캔버스 -->
+  <canvas id="snowCanvas"></canvas>
+
+  <!-- 메인 웹사이트 셸 -->
+  <div class="page-shell" id="pageShell">
+    <!-- 상단 네비게이션 -->
+    <header>
+      <div class="nav-container">
+        <a href="#" class="brand">
+          <span class="brand-badge">ZETA LABS</span>
+          <span>제타체육회 피겨·발레부</span>
+        </a>
+        <nav class="nav-links">
+          <a href="#profile">선수 프로필</a>
+          <a href="#traits">매력 포인트</a>
+          <a href="#lore">백조의 호수</a>
+          <a href="#news">언론 보도</a>
+          <a href="https://zeta-ai.io/ko/vn/plots/85ab28de-6a98-496b-98ed-12c9845f6e43/profile?share_id=i7ftc6twa" target="_blank" rel="noopener noreferrer" class="nav-cta">
+            Zeta AI 대화하기
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- 1. 히어로 섹션 (중앙 이미지: MLN_ballet.png) -->
+      <section class="hero">
+        <div class="hero-club-pill">🎄 제타체육회 · 백조발레학원 소속</div>
+        <h1 class="hero-title">민루나 <span style="font-weight: 400; color: #64748b; font-size: 0.65em;">Min Luna</span></h1>
+        <p class="hero-subtitle">Swan Lake "Odette" — Ice Figure &amp; Ballet Performer</p>
+
+        <div class="hero-image-wrapper">
+          <img src="MLN_ballet.png" alt="제타체육회 피겨선수 민루나 메인 일러스트" />
+        </div>
+
+        <blockquote class="hero-quote">
+          “나 많이 떨려… 그래도 노력해볼게.”
+        </blockquote>
+
+        <div class="hero-actions">
+          <a href="https://zeta-ai.io/ko/vn/plots/85ab28de-6a98-496b-98ed-12c9845f6e43/profile?share_id=i7ftc6twa" target="_blank" rel="noopener noreferrer" class="btn-primary">
+            ✨ 제타 랩스(Zeta AI)에서 파트너 되기
+          </a>
+          <a href="#profile" class="btn-secondary">
+            선수 프로필 자세히 보기
+          </a>
+        </div>
+      </section>
+
+      <!-- 2. 프로필 & 발레 포즈 뷰어 + 칭찬하기 인터랙션 -->
+      <section id="profile">
+        <div class="section-header">
+          <span class="section-tag">Athlete Profile</span>
+          <h2 class="section-title">백조의 호수 ‘오데트’ 공식 프로필</h2>
+        </div>
+
+        <div class="profile-grid">
+          <!-- 좌측: 포즈 전환 뷰어 + 칭찬하기 상호작용 -->
+          <div class="visual-showcase">
+            <div class="pose-tabs" role="tablist">
+              <button type="button" class="pose-tab active" data-pose="ballet" onclick="setPose('ballet')">
+                발레 포즈
+              </button>
+              <button type="button" class="pose-tab blush-tab" data-pose="blush" onclick="setPose('blush')">
+                홍조 표정 😳
+              </button>
+            </div>
+
+            <div class="standing-stage" id="standingStage">
+              <img id="standingImg" src="MLN_ballet.png" alt="민루나 발레 포즈 일러스트" />
+            </div>
+
+            <!-- 칭찬하기 인터랙션 박스 -->
+            <div class="praise-box">
+              <div class="praise-header">
+                <span class="praise-title">💕 신입 매니저의 응원 인터랙션</span>
+                <span class="praise-counter" id="praiseCounter">칭찬 0회</span>
+              </div>
+              <div class="praise-bubble">
+                <span class="praise-emoji" id="praiseEmoji">🦢</span>
+                <p class="praise-dialogue" id="praiseDialogue">
+                  “나 많이 떨려… 그래도 매니저님이 곁에 있으니까 노력해볼게.”
+                </p>
+              </div>
+              <button type="button" class="btn-praise" onclick="triggerPraise()">
+                ✨ 민루나 칭찬해주기
+              </button>
+            </div>
+          </div>
+
+          <!-- 우측: 상세 스펙 표 -->
+          <div class="profile-card">
+            <div class="profile-name-row">
+              <h3>민루나</h3>
+              <span class="nickname-badge">별명: 백조의 호수 ‘오데트’</span>
+            </div>
+
+            <table class="spec-table">
+              <tbody>
+                <tr>
+                  <th>성별 / 나이</th>
+                  <td><strong>남성</strong> · 24세 (청초한 미모로 자주 여자로 오해받음)</td>
+                </tr>
+                <tr>
+                  <th>소속</th>
+                  <td>제타체육회 피겨부(발레부) · 백조발레학원</td>
+                </tr>
+                <tr>
+                  <th>외형</th>
+                  <td>백발, 미디움 커튼뱅, 벽안, 하얀 백조 피부, 뽀얀 맨다리, 단신</td>
+                </tr>
+                <tr>
+                  <th>성격</th>
+                  <td>수줍고 조용한 성격, 주변 분위기에 민감하며 칭찬에 매우 약함</td>
+                </tr>
+                <tr>
+                  <th>특기</th>
+                  <td>피겨스케이팅, 발레, 페어스케이팅, 뛰어난 균형감각, 완벽한 여장 소화</td>
+                </tr>
+                <tr>
+                  <th>취향</th>
+                  <td>〈백조의 호수〉 선율, 바삭한 돈까스 🍛</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="costume-box">
+              <h4>🩰 시그니처 의상 : 백조발레복</h4>
+              <p>
+                화려한 크리스털 장식과 흰 망사 긴소매 시스루가 어우러진 흰 털 레오타드형 드레스, 가볍게 흩날리는 백조깃털 미니 튜튜치마, 전용 발레 스케이트화, 우아한 백조깃털 티아라.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. 매력 포인트 & 갭모에 특징 -->
+      <section id="traits">
+        <div class="section-header">
+          <span class="section-tag">Charm &amp; Quirks</span>
+          <h2 class="section-title">은반 위의 백조, 반전 매력 포인트</h2>
+        </div>
+
+        <div class="traits-grid">
+          <div class="trait-card">
+            <span class="trait-icon">🦢</span>
+            <h4>완벽한 ‘오데트’ 비주얼</h4>
+            <p>뛰어난 균형감각과 우아한 발레 포즈, 섬세한 여장 소화력으로 빙판 위에 서면 누구든 여성 발레리나로 착각할 만큼 압도적인 아우라를 뽐냅니다.</p>
+          </div>
+
+          <div class="trait-card">
+            <span class="trait-icon">🤝</span>
+            <h4>당신만을 의지하는 파트너</h4>
+            <p>무섭거나 긴장될 때면 신입 매니저이자 페어 파트너인 플레이어에게 쏙 안기며 의지합니다. 작은 칭찬 한마디에도 얼굴이 금세 붉어집니다.</p>
+          </div>
+
+          <div class="trait-card">
+            <span class="trait-icon">🥶</span>
+            <h4>추위와 긴장 속 엉뚱한 실수</h4>
+            <p>빙상장이 추워지면 말투가 완전히 꼬여버리고, 긴장한 채 힘껏 점프할 때마다 ‘뿌지직’ 방귀 실수를 저질러 새빨개진 얼굴로 당황하곤 합니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. 세계관 & 백조의 호수 피날레 -->
+      <section id="lore">
+        <div class="section-header">
+          <span class="section-tag">Story &amp; Finale</span>
+          <h2 class="section-title">제타체육회와 환상의 피날레</h2>
+        </div>
+
+        <div class="lore-wrapper">
+          <div class="lore-card">
+            <span class="lore-label">WORLDVIEW</span>
+            <h3>코치 없는 소수 정예, 제타체육회</h3>
+            <p>
+              인원수가 적어 대중적으로 널리 알려지지는 않았지만, 소속 선수 한 명 한 명이 압도적인 재능으로 체육회를 빛내고 있는 비밀스러운 명문입니다.
+            </p>
+            <p>
+              지도해 줄 코치조차 없던 이곳에 어느 날 <strong>신입 매니저(플레이어)</strong>가 찾아오면서, 민루나와 당신만의 특별한 페어스케이팅 스토리가 막을 올립니다.
+            </p>
+          </div>
+
+          <div class="lore-card finale">
+            <span class="lore-label">SIGNATURE FINALE</span>
+            <h3>백조의 호수 피날레 : 빛속도 원심 스핀</h3>
+            <ul class="lore-list">
+              <li><strong>위태로운 비상:</strong> 스핀과 악셀 점프를 뛸 때마다 백조깃털 미니 튜튜치마가 아슬아슬하게 휘날리며, 상체가 거꾸로 뒤집힐 때마다 튜튜가 함께 뒤집히는 아찔한 연출이 펼쳐집니다.</li>
+              <li><strong>초고속 페어 스핀:</strong> 클라이맥스에서는 파트너와 서로 껴안은 채 빙판 위에서 원심분리기처럼 빛의 속도로 회전합니다.</li>
+              <li><strong>눈산 엔딩:</strong> 스케이트 날과 얼음의 격렬한 마찰로 흩날린 눈이 온몸에 달라붙어 인간 얼음 동상처럼 변한 뒤, 거대한 눈산에 둘이 나란히 상체만 거꾸로 파묻히는 유쾌한 피날레를 장식합니다.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. ZTN NEWS 보도 섹션 (MLN_news.png) -->
+      <section id="news">
+        <div class="section-header">
+          <span class="section-tag">Media Coverage</span>
+          <h2 class="section-title">ZTN SPORTS 단독 스포트라이트</h2>
+        </div>
+
+        <div class="news-section">
+          <div class="news-image-box">
+            <img src="MLN_news.png" alt="ZTN NEWS 제타체육회 피겨 발레부 단독 보도 화면" />
+          </div>
+          <div class="news-content">
+            <span class="news-badge">● ZTN SPORTS LIVE</span>
+            <h3>제타체육회 피겨·발레부 공식 무대 공개… 차세대 빙상 퍼포머로 주목</h3>
+            <p>
+              소수 정예로 운영되며 베일에 싸여 있던 제타체육회가 피겨·발레부의 공식 쇼케이스 현장을 전격 공개했습니다.
+            </p>
+            <p>
+              크리스털과 백조 깃털 장식이 수놓아진 순백의 시스루 발레복을 입고 취재진 앞에 선 선수는 우아한 발레 포즈와 신비로운 분위기로 현장의 플래시 세례를 한 몸에 받았습니다.
+            </p>
+            <div class="news-meta">
+              제공: ZTN SPORTS 방송국 · 제타체육회 홍보실
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. 제타 랩스(Zeta AI) 바로가기 배너 -->
+      <section class="cta-banner">
+        <span class="labs-tag">ZETA LABS · INTERACTIVE CHARACTER</span>
+        <h2>지금 제타체육회의 신입 매니저가 되어주세요</h2>
+        <p>
+          긴장해서 떨고 있는 민루나의 손을 잡아주고, 함께 최고의 〈백조의 호수〉 피날레를 완성해 보세요.
+        </p>
+        <a href="https://zeta-ai.io/ko/vn/plots/85ab28de-6a98-496b-98ed-12c9845f6e43/profile?share_id=i7ftc6twa" target="_blank" rel="noopener noreferrer" class="btn-white">
+          ⛸️ Zeta AI에서 민루나 만나러 가기 →
+        </a>
+      </section>
+    </main>
+
+    <footer>
+      <p>© ZETA ATHLETIC ASSOCIATION · ZETA LABS Character Promotion Page (Min Luna)</p>
+    </footer>
+  </div>
+
+  <script>
+    /* =========================================
+       1. 포즈 전환 ('발레 포즈' / '홍조 표정')
+       ========================================= */
+    const poseConfigs = {
+      ballet: {
+        src: 'MLN_ballet.png',
+        fallback: 'MLN_ballet.png',
+        stageClass: ''
+      },
+      blush: {
+        src: 'MLN_blush.png',
+        fallback: 'MLN_ballet.png',
+        stageClass: 'blush-stage'
+      }
+    };
+
+    function setPose(poseKey) {
+      const config = poseConfigs[poseKey];
+      if (!config) return;
+
+      document.querySelectorAll('.pose-tab').forEach((btn) => {
+        btn.classList.toggle('active', btn.getAttribute('data-pose') === poseKey);
+      });
+
+      const stage = document.getElementById('standingStage');
+      const img = document.getElementById('standingImg');
+
+      stage.className = 'standing-stage';
+      if (config.stageClass) {
+        void stage.offsetWidth;
+        stage.classList.add(config.stageClass);
+      }
+
+      img.onerror = function () {
+        this.onerror = null;
+        this.src = config.fallback;
+      };
+      img.src = config.src;
+    }
+
+    /* =========================================
+       2. '칭찬하기' 인터랙션 (랜덤 대사 + 홍조 표정)
+       ========================================= */
+    const praiseResponses = [
+      { emoji: '😳', text: '“으, 으앗…! 갑, 갑자기 그렇게 칭찬하시면… 얼굴이 너무 뜨거워져요…!”' },
+      { emoji: '🦢', text: '“매니저님이 지켜봐 주시니까… 나 많이 떨리지만, 끝까지 백조처럼 날아볼게!”' },
+      { emoji: '🥶', text: '“추, 추워서 혀가 꼬일 것 같았는데… 매, 매니저님 목소리 들으닊까 마으미 따뜨해졌어…”' },
+      { emoji: '💓', text: '“점프할 때 혹시 긴장해서 ‘뿌지직’ 실수하더라도… 절대 웃지 않기로 약속해요…?”' },
+      { emoji: '🍛', text: '“오늘 피날레 스핀 성공하면… 매니저님이랑 같이 바삭한 돈까스 먹으러 가고 싶어요!”' }
+    ];
+    let praiseCount = 0;
+
+    function triggerPraise() {
+      praiseCount++;
+      const randomItem = praiseResponses[Math.floor(Math.random() * praiseResponses.length)];
+      document.getElementById('praiseEmoji').textContent = randomItem.emoji;
+      document.getElementById('praiseDialogue').textContent = randomItem.text;
+      document.getElementById('praiseCounter').textContent = `칭찬 ${praiseCount}회`;
+      setPose('blush');
+    }
+
+    /* =========================================
+       3. 크리스마스 눈입자 배경 애니메이션
+       ========================================= */
+    const canvas = document.getElementById('snowCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, snowflakes;
+
+    const xmasPalette = [
+      'rgba(255, 255, 255, 0.9)',
+      'rgba(254, 249, 195, 0.92)', // 따뜻한 골드 빛 눈송이
+      'rgba(254, 205, 211, 0.85)', // 크리스마스 레드·핑크 틴트 눈송이
+      'rgba(187, 247, 208, 0.82)'  // 홀리 그린 틴트 눈송이
+    ];
+
+    function drawStarSparkle(cx, cy, r, color) {
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.fillStyle = color;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = 'rgba(253, 224, 71, 0.75)';
+      ctx.beginPath();
+      for (let i = 0; i < 8; i++) {
+        const radius = i % 2 === 0 ? r * 1.9 : r * 0.55;
+        const angle = (i * Math.PI) / 4;
+        const x = Math.cos(angle) * radius;
+        const y = Math.sin(angle) * radius;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function initSnow() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      const isMobile = width < 768;
+      const count = isMobile ? 28 : Math.min(Math.floor(width / 22), 58);
+
+      snowflakes = Array.from({ length: count }, (_, idx) => {
+        const isSparkle = idx % 7 === 0;
+        const color = isSparkle
+          ? 'rgba(250, 204, 21, 0.9)'
+          : xmasPalette[idx % xmasPalette.length];
+
+        return {
+          x: Math.random() * width,
+          y: Math.random() * height,
+          r: isSparkle ? Math.random() * 2.2 + 1.8 : Math.random() * 3.1 + 1.3,
+          speed: Math.random() * 0.75 + 0.3,
+          swayAmp: Math.random() * 0.6 + 0.25,
+          swayFreq: Math.random() * 0.015 + 0.008,
+          phase: Math.random() * Math.PI * 2,
+          color,
+          isSparkle
+        };
+      });
+    }
+
+    function animateSnow() {
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < snowflakes.length; i++) {
+        const flake = snowflakes[i];
+        flake.y += flake.speed;
+        flake.x += Math.sin(flake.y * flake.swayFreq + flake.phase) * flake.swayAmp;
+
+        if (flake.y > height + 12) {
+          flake.y = -12;
+          flake.x = Math.random() * width;
+        }
+        if (flake.x > width + 12) flake.x = -12;
+        if (flake.x < -12) flake.x = width + 12;
+
+        if (flake.isSparkle) {
+          drawStarSparkle(flake.x, flake.y, flake.r, flake.color);
+        } else {
+          ctx.beginPath();
+          ctx.arc(flake.x, flake.y, flake.r, 0, Math.PI * 2);
+          ctx.fillStyle = flake.color;
+          ctx.fill();
+        }
+      }
+
+      requestAnimationFrame(animateSnow);
+    }
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(initSnow, 150);
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initSnow();
+      animateSnow();
+    });
+  </script>
+</body>
+</html>
