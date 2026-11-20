@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>민루나 (Min Luna) | 인트로 효과</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html.intro-locked,
+    body.intro-locked {
+      overflow: hidden;
+      height: 100%;
+    }
+
+    body {
+      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #0b132b;
+      color: #ffffff;
+      min-height: 100vh;
+    }
+
+    /* =========================================
+       인트로 오버레이 (WebP 1회 재생 + 눈입자 폭발)
+       ========================================= */
+    #intro-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background-color: #0b132b;
+      overflow: hidden;
+      transition: opacity 0.95s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.95s ease;
+    }
+
+    #intro-overlay.fade-out {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .intro-bg-media {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transform: scale(1.03);
+      transition: transform 2.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.9s ease, opacity 0.9s ease;
+      will-change: transform, filter, opacity;
+    }
+
+    #intro-overlay.burst-active .intro-bg-media {
+      transform: scale(1.12);
+      filter: brightness(1.25) blur(3px);
+    }
+
+    .snow-flash {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background: radial-gradient(
+        circle at center,
+        rgba(255, 255, 255, 0.95) 0%,
+        rgba(224, 242, 254, 0.85) 60%,
+        rgba(255, 255, 255, 0.98) 100%
+      );
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.75s ease-out;
+    }
+
+    #intro-overlay.burst-active .snow-flash {
+      opacity: 1;
+    }
+
+    #intro-snow-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .intro-controls {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      z-index: 10;
+    }
+
+    .btn-intro-action {
+      background: rgba(15, 23, 42, 0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+      transition: transform 0.15s, background 0.15s;
+    }
+
+    .btn-intro-action:hover {
+      background: rgba(15, 23, 42, 0.8);
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+<body class="intro-locked">
+  <!-- 인트로 오버레이 -->
+  <div id="intro-overlay" role="dialog" aria-label="민루나 인트로">
+    <canvas id="webp-canvas" class="intro-bg-media" style="display: none;"></canvas>
+    <img
+      id="webp-fallback"
+      class="intro-bg-media"
+      src="MLN_background.webp"
+      alt="민루나 배경 일러스트"
+    />
+
+    <div class="snow-flash"></div>
+    <canvas id="intro-snow-canvas"></canvas>
+
+    <div class="intro-controls">
+      <button type="button" class="btn-intro-action" onclick="finishIntro()">건너뛰기 ⏭</button>
+    </div>
+  </div>
+
+  <script>
+    const REDIRECT_URL = 'web.html';
+    const FADE_DURATION_MS = 950;
+
+    const introOverlay = document.getElementById('intro-overlay');
+    const webpCanvas = document.getElementById('webp-canvas');
+    const webpCtx = webpCanvas.getContext('2d');
+    const webpFallback = document.getElementById('webp-fallback');
+    const introSnowCanvas = document.getElementById('intro-snow-canvas');
+    const introSnowCtx = introSnowCanvas.getContext('2d');
+
+    let introWidth = (introSnowCanvas.width = window.innerWidth);
+    let introHeight = (introSnowCanvas.height = window.innerHeight);
+
+    let introParticles = [];
+    let introSnowAnimationId = null;
+    let webpTimerId = null;
+    let webpPlaybackToken = 0;
+    let introTimers = [];
+    let isBurstMode = false;
+    let isFinishing = false;
+
+    function clearIntroTimers() {
+      introTimers.forEach((id) => clearTimeout(id));
+      introTimers = [];
+      if (webpTimerId) {
+        clearTimeout(webpTimerId);
+        webpTimerId = null;
+      }
+      webpPlaybackToken++;
+    }
+
+    async function playWebpOnce(src, token) {
+      if (!('ImageDecoder' in window)) {
+        webpCanvas.style.display = 'none';
+        webpFallback.style.display = 'block';
+        return;
+      }
+
+      try {
+        const response = await fetch(src, { cache: 'no-store' });
+        if (!response.ok || token !== webpPlaybackToken) return;
+
+        const decoder = new ImageDecoder({
+          data: response.body,
+          type: 'image/webp'
+        });
+
+        await decoder.tracks.ready;
+        const track = decoder.tracks.selectedTrack;
+        const frameCount = track ? track.frameCount : 1;
+
+        if (frameCount <= 1) {
+          webpCanvas.style.display = 'none';
+          webpFallback.style.display = 'block';
+          return;
+        }
+
+        webpFallback.style.display = 'none';
+        webpCanvas.style.display = 'block';
+
+        for (let i = 0; i < frameCount; i++) {
+          if (token !== webpPlaybackToken) return;
+
+          const result = await decoder.decode({ frameIndex: i });
+          if (token !== webpPlaybackToken) {
+            result.image.close();
+            return;
+          }
+
+          const frame = result.image;
+          if (webpCanvas.width !== frame.displayWidth || webpCanvas.height !== frame.displayHeight) {
+            webpCanvas.width = frame.displayWidth;
+            webpCanvas.height = frame.displayHeight;
+          }
+
+          webpCtx.clearRect(0, 0, webpCanvas.width, webpCanvas.height);
+          webpCtx.drawImage(frame, 0, 0);
+
+          const delayMs = frame.duration ? Math.max(frame.duration / 1000, 16) : 50;
+          frame.close();
+
+          if (i === frameCount - 1) {
+            break;
+          }
+
+          await new Promise((resolve) => {
+            webpTimerId = setTimeout(resolve, delayMs);
+          });
+        }
+
+        decoder.close();
+      } catch (err) {
+        webpCanvas.style.display = 'none';
+        webpFallback.style.display = 'block';
+      }
+    }
+
+    function initIntroParticles(burst = false) {
+      introParticles = [];
+      const count = burst ? 260 : 75;
+      const centerX = introWidth / 2;
+      const centerY = introHeight / 2;
+
+      for (let i = 0; i < count; i++) {
+        if (!burst) {
+          introParticles.push({
+            x: Math.random() * introWidth,
+            y: Math.random() * introHeight,
+            vx: (Math.random() - 0.5) * 0.9,
+            vy: Math.random() * 1.4 + 0.5,
+            radius: Math.random() * 2.8 + 1.2,
+            alpha: Math.random() * 0.65 + 0.25,
+            glow: Math.random() > 0.6
+          });
+        } else {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = Math.random() * 22 + 6;
+          const startSpread = Math.random() * 60;
+          introParticles.push({
+            x: centerX + Math.cos(angle) * startSpread,
+            y: centerY + Math.sin(angle) * startSpread,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            radius: Math.random() * 5.5 + 1.8,
+            alpha: Math.random() * 0.4 + 0.6,
+            glow: true
+          });
+        }
+      }
+    }
+
+    function renderIntroSnow() {
+      introSnowCtx.clearRect(0, 0, introWidth, introHeight);
+
+      for (let i = 0; i < introParticles.length; i++) {
+        const p = introParticles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (!isBurstMode) {
+          if (p.y > introHeight) p.y = -10;
+          if (p.x > introWidth) p.x = 0;
+          if (p.x < 0) p.x = introWidth;
+        } else {
+          p.vx *= 1.025;
+          p.vy *= 1.025;
+        }
+
+        introSnowCtx.save();
+        introSnowCtx.beginPath();
+        introSnowCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        introSnowCtx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+
+        if (p.glow) {
+          introSnowCtx.shadowBlur = isBurstMode ? 14 : 6;
+          introSnowCtx.shadowColor = '#e0f2fe';
+        }
+
+        introSnowCtx.fill();
+        introSnowCtx.restore();
+      }
+
+      introSnowAnimationId = requestAnimationFrame(renderIntroSnow);
+    }
+
+    function startIntroSequence() {
+      clearIntroTimers();
+      if (introSnowAnimationId) cancelAnimationFrame(introSnowAnimationId);
+
+      isFinishing = false;
+      const currentToken = webpPlaybackToken;
+
+      isBurstMode = false;
+      document.documentElement.classList.add('intro-locked');
+      document.body.classList.add('intro-locked');
+      introOverlay.classList.remove('fade-out', 'burst-active');
+
+      playWebpOnce('MLN_background.webp', currentToken);
+
+      initIntroParticles(false);
+      renderIntroSnow();
+
+      introTimers.push(
+        setTimeout(() => {
+          isBurstMode = true;
+          initIntroParticles(true);
+          introOverlay.classList.add('burst-active');
+        }, 1800)
+      );
+
+      introTimers.push(
+        setTimeout(() => {
+          finishIntro();
+        }, 2850)
+      );
+    }
+
+    function finishIntro() {
+      if (isFinishing) return;
+      isFinishing = true;
+
+      clearIntroTimers();
+      introOverlay.classList.add('fade-out');
+
+      setTimeout(() => {
+        if (introSnowAnimationId) {
+          cancelAnimationFrame(introSnowAnimationId);
+          introSnowAnimationId = null;
+        }
+        window.location.href = REDIRECT_URL;
+      }, FADE_DURATION_MS);
+    }
+
+    window.addEventListener('resize', () => {
+      introWidth = introSnowCanvas.width = window.innerWidth;
+      introHeight = introSnowCanvas.height = window.innerHeight;
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      startIntroSequence();
+    });
+  </script>
+</body>
+</html>
