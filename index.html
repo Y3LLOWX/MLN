@@ -1,0 +1,2552 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>민루나 (Min Luna) | 제타체육회 피겨·발레부 공식 프로필</title>
+  <link rel="icon" type="image/png" href="icon.png" />
+  <link rel="shortcut icon" type="image/png" href="icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Gowun+Batang:wght@400;700&family=Great+Vibes&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-white: #ffffff;
+      --primary-blue: #3b82f6;
+      --ice-cyan: #38bdf8;
+      --zeta-purple: #6d28d9;
+      --zeta-purple-light: #ede9fe;
+      --blush-pink: #ec4899;
+      --blush-bg: #fdf2f8;
+      --xmas-red: #dc2626;
+      --xmas-gold: #eab308;
+      --xmas-pine: #15803d;
+      --text-dark: #1e293b;
+      --text-muted: #64748b;
+      --border-ice: rgba(148, 163, 184, 0.25);
+      --shadow-soft: 0 12px 32px rgba(30, 58, 138, 0.08);
+      --shadow-card: 0 8px 24px rgba(15, 23, 42, 0.06);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(220, 38, 38, 0.08) 0%, transparent 32%),
+        radial-gradient(circle at 88% 14%, rgba(21, 128, 61, 0.08) 0%, transparent 34%),
+        linear-gradient(180deg, #e8f1fb 0%, #f8fafc 38%, #eef4fc 100%);
+      color: var(--text-dark);
+      line-height: 1.65;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* 이미지 커서/드래그/우클릭 저장 방지 */
+    img {
+      pointer-events: none !important;
+      -webkit-user-select: none !important;
+      user-select: none !important;
+      -webkit-user-drag: none !important;
+      -webkit-touch-callout: none !important;
+    }
+
+    #snowCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .page-shell {
+      position: relative;
+      z-index: 1;
+      transition: opacity 0.25s ease;
+    }
+
+    /* 팝업 활성 시 전체 화면(페이지 셸) 불투명도 50% */
+    body.popup-open .page-shell {
+      opacity: 0.5;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-ice);
+    }
+
+    .nav-container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0.9rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-badge {
+      background: linear-gradient(135deg, var(--zeta-purple), #4f46e5);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      color: var(--zeta-purple);
+    }
+
+    .nav-cta {
+      background: var(--zeta-purple);
+      color: #fff !important;
+      padding: 0.5rem 1.05rem;
+      border-radius: 999px;
+      font-weight: 700 !important;
+      font-size: 0.84rem !important;
+      box-shadow: 0 4px 12px rgba(109, 40, 217, 0.25);
+      transition: transform 0.2s, background 0.2s !important;
+      white-space: nowrap;
+    }
+
+    .nav-cta:hover {
+      background: #5b21b6;
+      transform: translateY(-1px);
+    }
+
+    .bgm-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #f1f5f9;
+      color: var(--text-dark);
+      border: 1px solid #cbd5e1;
+      padding: 0.48rem 0.9rem;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+    }
+
+    .bgm-toggle-btn:hover {
+      background: #e2e8f0;
+      transform: translateY(-1px);
+    }
+
+    .bgm-toggle-btn.playing {
+      background: linear-gradient(135deg, #ec4899 0%, #6d28d9 100%);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 6px 16px rgba(109, 40, 217, 0.28);
+    }
+
+    main {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 5rem;
+    }
+
+    section {
+      margin-bottom: 4.5rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 2.25rem;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-blue);
+      letter-spacing: 0.06em;
+      margin-bottom: 0.25rem;
+    }
+
+    .section-title {
+      font-family: 'Gowun Batang', serif;
+      font-size: clamp(1.65rem, 3.5vw, 2.3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-dark);
+    }
+
+    /* 1. 히어로 섹션 */
+    .hero {
+      background: radial-gradient(circle at 50% 18%, #ffffff 0%, #e0f2fe 65%, #fef2f2 100%);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: var(--radius-lg);
+      padding: clamp(2rem, 4vw, 3.5rem) 1.5rem;
+      box-shadow: var(--shadow-soft);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-club-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid #fecdd3;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #be123c;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-family: 'Gowun Batang', serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.45rem;
+      text-shadow: 0 4px 18px rgba(56, 189, 248, 0.22);
+    }
+
+    .hero-title span {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 600;
+      color: #64748b;
+      font-size: 0.68em;
+    }
+
+    .hero-subtitle {
+      font-family: 'Great Vibes', 'Cormorant Garamond', cursive;
+      font-size: clamp(1.55rem, 3.2vw, 2.15rem);
+      color: #0284c7;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      margin-bottom: 1.75rem;
+      text-shadow: 0 2px 10px rgba(2, 132, 199, 0.14);
+    }
+
+    .hero-image-wrapper {
+      position: relative;
+      max-width: 440px;
+      width: 100%;
+      margin: 0 auto 1.75rem;
+      border-radius: 22px;
+      padding: 10px;
+      background: linear-gradient(135deg, #ffffff, #bae6fd, #fecdd3, #ddd6fe);
+      box-shadow: 0 20px 45px rgba(2, 132, 199, 0.18);
+    }
+
+    .hero-image-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 16px;
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
+      background-color: #dbeafe;
+    }
+
+    .hero-quote {
+      max-width: 540px;
+      margin: 0 auto 1.75rem;
+      background: rgba(255, 255, 255, 0.92);
+      border-left: 4px solid var(--xmas-red);
+      padding: 0.85rem 1.35rem;
+      border-radius: 0 14px 14px 0;
+      font-family: 'Nanum Pen Script', cursive;
+      font-size: clamp(1.45rem, 3vw, 1.8rem);
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      color: #334155;
+      box-shadow: 0 4px 14px rgba(220, 38, 38, 0.06);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.85rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, #6d28d9 0%, #4f46e5 100%);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.95rem 2rem;
+      border-radius: 999px;
+      box-shadow: 0 10px 25px rgba(109, 40, 217, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(109, 40, 217, 0.4);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      color: var(--text-dark);
+      border: 1px solid #cbd5e1;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.95rem 1.6rem;
+      border-radius: 999px;
+      transition: background 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: #f1f5f9;
+    }
+
+    /* 2. 프로필 & 발레 포즈 뷰어 + 칭찬하기 인터랙션 */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .visual-showcase {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border-ice);
+      text-align: center;
+    }
+
+    .pose-tabs {
+      display: flex;
+      gap: 0.5rem;
+      background: #f1f5f9;
+      padding: 0.35rem;
+      border-radius: 12px;
+      margin-bottom: 1.15rem;
+    }
+
+    .pose-tab {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 0.55rem 0.6rem;
+      border-radius: 9px;
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .pose-tab.active {
+      background: #ffffff;
+      color: var(--zeta-purple);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .pose-tab.blush-tab.active {
+      color: var(--blush-pink);
+      background: var(--blush-bg);
+    }
+
+    .standing-stage {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 25%, #ffffff 0%, #f0f9ff 100%);
+      border: 1px solid #e2e8f0;
+      transition: background 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .standing-stage.blush-stage {
+      background: radial-gradient(circle at 50% 35%, #fff1f2 0%, #fce7f3 65%, #fbcfe8 100%);
+      box-shadow: inset 0 0 24px rgba(236, 72, 153, 0.18);
+    }
+
+    .standing-stage.climax-stage {
+      background: radial-gradient(circle at 50% 35%, #ffe4e6 0%, #fbcfe8 55%, #e879f9 100%);
+      box-shadow: inset 0 0 32px rgba(219, 39, 119, 0.32);
+    }
+
+    .standing-stage img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.25s ease;
+    }
+
+    .standing-stage.blush-stage img {
+      animation: shyShake 0.45s ease;
+    }
+
+    .standing-stage.climax-stage img {
+      animation: climaxPulse 0.4s ease;
+    }
+
+    @keyframes shyShake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-4px) rotate(-0.5deg); }
+      75% { transform: translateX(4px) rotate(0.5deg); }
+    }
+
+    @keyframes climaxPulse {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      30% { transform: scale(1.03) rotate(-1deg); }
+      70% { transform: scale(1.03) rotate(1deg); }
+    }
+
+    .praise-box {
+      margin-top: 1.15rem;
+      background: linear-gradient(135deg, #fdf2f8 0%, #f5f3ff 100%);
+      border: 1px solid #fbcfe8;
+      border-radius: 16px;
+      padding: 1rem;
+      text-align: left;
+      transition: border-color 0.25s, background 0.25s;
+    }
+
+    .praise-box.climax-active {
+      background: linear-gradient(135deg, #fce7f3 0%, #fae8ff 100%);
+      border-color: #f472b6;
+    }
+
+    .praise-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.6rem;
+      gap: 0.5rem;
+    }
+
+    .praise-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #9d174d;
+    }
+
+    .praise-counter {
+      background: #ffffff;
+      color: var(--blush-pink);
+      border: 1px solid #f9a8d4;
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+    }
+
+    .praise-bubble {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 0.8rem 1rem;
+      margin-bottom: 0.8rem;
+      box-shadow: 0 2px 8px rgba(236, 72, 153, 0.08);
+      min-height: 76px;
+    }
+
+    .praise-emoji {
+      font-size: 1.55rem;
+      line-height: 1.2;
+      flex-shrink: 0;
+    }
+
+    .praise-dialogue {
+      font-family: 'Nanum Pen Script', cursive;
+      font-size: 1.38rem;
+      font-weight: 400;
+      color: #334155;
+      line-height: 1.35;
+    }
+
+    .btn-praise {
+      width: 100%;
+      border: none;
+      background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 800;
+      padding: 0.78rem 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(236, 72, 153, 0.25);
+      transition: transform 0.15s, box-shadow 0.15s, background 0.25s;
+    }
+
+    .btn-praise.climax-btn {
+      background: linear-gradient(135deg, #e11d48 0%, #c026d3 100%);
+      box-shadow: 0 8px 22px rgba(225, 29, 72, 0.35);
+    }
+
+    .btn-praise:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(236, 72, 153, 0.35);
+    }
+
+    .btn-praise:active {
+      transform: scale(0.98);
+    }
+
+    .profile-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.5rem, 3vw, 2.25rem);
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border-ice);
+    }
+
+    .profile-name-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.65rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .profile-name-btn {
+      font-family: 'Gowun Batang', serif;
+      font-size: clamp(2.1rem, 4vw, 2.75rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--text-dark);
+      background: none;
+      border: none;
+      padding: 0.1rem 0.25rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: color 0.2s, background 0.2s, transform 0.15s;
+    }
+
+    .profile-name-btn:hover {
+      color: var(--zeta-purple);
+      background: var(--zeta-purple-light);
+      transform: translateY(-1px);
+    }
+
+    .nickname-badge {
+      background: #e0f2fe;
+      color: #0284c7;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+    }
+
+    .spec-table th,
+    .spec-table td {
+      padding: 0.65rem 0.5rem;
+      text-align: left;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 0.94rem;
+      vertical-align: top;
+    }
+
+    .spec-table th {
+      width: 95px;
+      color: var(--text-muted);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .spec-table td {
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+
+    .tonkatsu-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fcd34d;
+      border-radius: 999px;
+      padding: 0.12rem 0.65rem;
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.15s, background 0.2s, box-shadow 0.2s;
+    }
+
+    .tonkatsu-trigger:hover {
+      background: #fde68a;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(217, 119, 6, 0.2);
+    }
+
+    .costume-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 1rem 1.15rem;
+    }
+
+    .costume-box h4 {
+      font-family: 'Gowun Batang', serif;
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #0369a1;
+      margin-bottom: 0.4rem;
+    }
+
+    .costume-box p {
+      font-size: 0.88rem;
+      color: #475569;
+      line-height: 1.55;
+    }
+
+    /* 2-2. 백조발레복 소재·구성 마인드맵 + 발레슈즈 같은 리스트 컨테이너 */
+    .costume-showcase-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    .mindmap-costume-card {
+      background: linear-gradient(160deg, #ffffff 0%, #f0f9ff 52%, #fdf2f8 100%);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.25rem, 3vw, 2rem);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-ice);
+    }
+
+    .mindmap-board-wrap {
+      max-width: 750px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .mindmap-stage-750 {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 750 / 630;
+      background: radial-gradient(circle at 50% 48%, #ffffff 0%, #e0f2fe 58%, #f1f5f9 100%);
+      border-radius: 20px;
+      border: 1.5px solid rgba(56, 189, 248, 0.35);
+      box-shadow: inset 0 0 36px rgba(255, 255, 255, 0.85), 0 12px 28px rgba(15, 23, 42, 0.07);
+      overflow: hidden;
+    }
+
+    .mindmap-costume-img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -49%);
+      width: 64%;
+      height: 86%;
+      object-fit: contain;
+      z-index: 2;
+      pointer-events: none;
+      filter: drop-shadow(0 12px 20px rgba(14, 116, 144, 0.14));
+    }
+
+    .mindmap-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .arrow-line {
+      fill: none;
+      stroke: #0284c7;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-dasharray: 5 4;
+      opacity: 0.72;
+      transition: stroke 0.2s, stroke-width 0.2s, opacity 0.2s;
+    }
+
+    .arrow-line.active {
+      stroke: var(--zeta-purple);
+      stroke-width: 3.2;
+      stroke-dasharray: none;
+      opacity: 1;
+    }
+
+    .arrow-head {
+      fill: #0284c7;
+      opacity: 0.85;
+      transition: fill 0.2s, opacity 0.2s;
+    }
+
+    .arrow-head.active {
+      fill: var(--zeta-purple);
+      opacity: 1;
+    }
+
+    .mm-node-btn {
+      position: absolute;
+      z-index: 4;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(6px);
+      border: 1.5px solid #bae6fd;
+      color: var(--text-dark);
+      border-radius: 12px;
+      padding: 0.34rem 0.62rem;
+      font-family: inherit;
+      font-size: clamp(0.64rem, 1.4vw, 0.8rem);
+      font-weight: 800;
+      line-height: 1.25;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.08);
+      transition: transform 0.18s, border-color 0.18s, background 0.18s, color 0.18s;
+      white-space: nowrap;
+    }
+
+    .mm-node-btn:hover,
+    .mm-node-btn.active {
+      transform: translate(-50%, -50%) scale(1.06);
+      border-color: var(--zeta-purple);
+      background: linear-gradient(135deg, #6d28d9 0%, #4f46e5 100%);
+      color: #ffffff;
+      box-shadow: 0 8px 20px rgba(109, 40, 217, 0.28);
+    }
+
+    .mm-tiara   { left: 19%; top: 17%; }
+    .mm-sleeves { left: 16%; top: 47%; }
+    .mm-tutu    { left: 18%; top: 79%; }
+    .mm-bodice  { left: 81%; top: 24%; }
+    .mm-fabric  { left: 82%; top: 51%; }
+    .mm-hem     { left: 80%; top: 78%; }
+
+    .mindmap-detail-panel {
+      margin-top: 1.25rem;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid var(--zeta-purple);
+      border-radius: 14px;
+      padding: 1rem 1.2rem;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+    }
+
+    .mindmap-detail-body {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .mindmap-detail-text {
+      flex: 1 1 240px;
+    }
+
+    .mindmap-detail-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .mindmap-detail-badge {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #0284c7;
+      background: #e0f2fe;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+    }
+
+    .mindmap-detail-title {
+      font-family: 'Gowun Batang', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .mindmap-detail-desc {
+      font-size: 0.9rem;
+      color: #334155;
+      line-height: 1.62;
+    }
+
+    .mindmap-warning-note {
+      margin-top: 0.75rem;
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      border-left: 4px solid #e11d48;
+      border-radius: 10px;
+      padding: 0.7rem 0.9rem;
+      font-size: 0.85rem;
+      color: #881337;
+      line-height: 1.55;
+      display: none;
+    }
+
+    .mindmap-warning-note.visible {
+      display: block;
+    }
+
+    /* 발레슈즈 분리 카드 (같은 리스트 내 독립 칸) */
+    .shoes-page-card {
+      background: linear-gradient(155deg, #ffffff 0%, #f0f9ff 55%, #fdf2f8 100%);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.5rem, 3.5vw, 2.25rem);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-ice);
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .shoes-showcase-box {
+      background: radial-gradient(circle at 50% 45%, #ffffff 0%, #e0f2fe 80%);
+      border-radius: 20px;
+      padding: 1.5rem;
+      border: 1px solid #bae6fd;
+      box-shadow: 0 12px 26px rgba(14, 116, 144, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 4 / 3;
+    }
+
+    .shoes-showcase-box img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 10px 18px rgba(15, 23, 42, 0.12));
+    }
+
+    .shoes-info-badge {
+      display: inline-block;
+      background: #e0f2fe;
+      color: #0284c7;
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      margin-bottom: 0.75rem;
+    }
+
+    .shoes-info-box h3 {
+      font-family: 'Gowun Batang', serif;
+      font-size: clamp(1.35rem, 2.6vw, 1.75rem);
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.85rem;
+    }
+
+    .shoes-info-box p {
+      font-size: 0.95rem;
+      color: #334155;
+      margin-bottom: 1rem;
+      line-height: 1.65;
+    }
+
+    .shoes-spec-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 1rem 1.15rem;
+    }
+
+    .shoes-spec-list li {
+      font-size: 0.9rem;
+      color: #475569;
+      padding-left: 1.3rem;
+      position: relative;
+    }
+
+    .shoes-spec-list li::before {
+      content: "🩰";
+      position: absolute;
+      left: 0;
+      font-size: 0.85rem;
+    }
+
+    /* 3. 매력 포인트 카드 */
+    .traits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .trait-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border-ice);
+      transition: transform 0.2s;
+    }
+
+    .trait-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .trait-icon {
+      font-size: 1.65rem;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .trait-card h4 {
+      font-family: 'Gowun Batang', serif;
+      font-size: 1.12rem;
+      font-weight: 700;
+      margin-bottom: 0.45rem;
+      color: var(--text-dark);
+    }
+
+    .trait-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* 4. 제타체육회 세계관 & 피날레 시그니처 */
+    .lore-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .lore-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.5rem, 3vw, 2rem);
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border-ice);
+    }
+
+    .lore-card.finale {
+      background: linear-gradient(145deg, #ffffff 0%, #f0f9ff 100%);
+      border: 1px solid #bae6fd;
+    }
+
+    .lore-label {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      margin-bottom: 0.75rem;
+      background: var(--zeta-purple-light);
+      color: var(--zeta-purple);
+    }
+
+    .lore-card.finale .lore-label {
+      background: #e0f2fe;
+      color: #0284c7;
+    }
+
+    .lore-card h3 {
+      font-family: 'Gowun Batang', serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      margin-bottom: 0.85rem;
+      line-height: 1.35;
+    }
+
+    .lore-card p {
+      font-size: 0.94rem;
+      color: #334155;
+      margin-bottom: 0.85rem;
+    }
+
+    .lore-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin-top: 0.75rem;
+    }
+
+    .lore-list li {
+      font-size: 0.9rem;
+      color: #475569;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+
+    .lore-list li::before {
+      content: "❄";
+      position: absolute;
+      left: 0;
+      color: var(--ice-cyan);
+      font-size: 0.8rem;
+    }
+
+    /* 5. ZTN NEWS 보도 섹션 */
+    .news-section {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.5rem, 3.5vw, 2.5rem);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-ice);
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .news-image-box {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.14);
+      border: 1px solid #e2e8f0;
+    }
+
+    .news-image-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .news-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #dc2626;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 0.25rem 0.65rem;
+      border-radius: 4px;
+      margin-bottom: 0.85rem;
+      letter-spacing: 0.05em;
+    }
+
+    .news-content h3 {
+      font-size: clamp(1.35rem, 2.8vw, 1.8rem);
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .news-content p {
+      font-size: 0.95rem;
+      color: #475569;
+      margin-bottom: 1rem;
+    }
+
+    .news-meta {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding-top: 0.85rem;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    /* 5-2. 제타체육회 발레부 모집 PV 섹션 */
+    .pv-section {
+      background: linear-gradient(155deg, #ffffff 0%, #f5f3ff 50%, #eff6ff 100%);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.5rem, 3.5vw, 2.5rem);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(109, 40, 217, 0.18);
+    }
+
+    .pv-card-inner {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    .pv-top-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.15rem;
+    }
+
+    .pv-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: linear-gradient(135deg, var(--zeta-purple), #4f46e5);
+      color: #ffffff;
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+    }
+
+    .pv-caption {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .pv-video-frame {
+      position: relative;
+      width: 100%;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #0f172a;
+      box-shadow: 0 18px 36px rgba(15, 23, 42, 0.18);
+      border: 2px solid rgba(255, 255, 255, 0.9);
+    }
+
+    .pv-video-frame video {
+      width: 100%;
+      max-height: 520px;
+      display: block;
+      background: #090d16;
+    }
+
+    .pv-desc-box {
+      margin-top: 1.15rem;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 1rem 1.25rem;
+    }
+
+    .pv-desc-box h3 {
+      font-family: 'Gowun Batang', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.35rem;
+    }
+
+    .pv-desc-box p {
+      font-size: 0.92rem;
+      color: #475569;
+    }
+
+    /* 6. 하단 CTA 배너 */
+    .cta-banner {
+      background: linear-gradient(135deg, #311068 0%, #5b21b6 50%, #1d4ed8 100%);
+      color: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: clamp(2.25rem, 5vw, 3.5rem) 1.5rem;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(79, 70, 229, 0.25);
+    }
+
+    .cta-banner .labs-tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .cta-banner h2 {
+      font-family: 'Gowun Batang', serif;
+      font-size: clamp(1.55rem, 3.5vw, 2.25rem);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .cta-banner p {
+      max-width: 560px;
+      margin: 0 auto 1.75rem;
+      color: #e0e7ff;
+      font-size: 0.98rem;
+    }
+
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #ffffff;
+      color: #4c1d95;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.02rem;
+      padding: 1rem 2.25rem;
+      border-radius: 999px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s;
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem 3rem;
+      color: var(--text-muted);
+      font-size: 0.84rem;
+    }
+
+    /* 팝업 모달 스타일 (배경 page-shell이 50% 불투명도가 되도록 최상위 레이어에 표시) */
+    .media-popup-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      background: rgba(15, 23, 42, 0.25);
+      backdrop-filter: blur(4px);
+    }
+
+    .media-popup-backdrop.open {
+      display: flex;
+    }
+
+    .media-popup-card {
+      position: relative;
+      max-width: 480px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 1.35rem 1.35rem 1.5rem;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.35);
+      border: 1.5px solid #e2e8f0;
+      text-align: center;
+      animation: popupFadeIn 0.2s ease;
+    }
+
+    @keyframes popupFadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .media-popup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .media-popup-title {
+      font-family: 'Gowun Batang', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .media-popup-close {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: #334155;
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .media-popup-close:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .media-popup-img-box {
+      border-radius: 16px;
+      overflow: hidden;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      margin-bottom: 0.85rem;
+    }
+
+    .media-popup-img-box img {
+      width: 100%;
+      max-height: 62vh;
+      object-fit: contain;
+      display: block;
+    }
+
+    .media-popup-caption {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 980px) {
+      .nav-links a:not(.nav-cta) {
+        display: none;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .profile-grid,
+      .shoes-page-card,
+      .lore-wrapper,
+      .news-section {
+        grid-template-columns: 1fr;
+      }
+
+      .traits-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .visual-showcase {
+        max-width: 480px;
+        margin: 0 auto;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-container {
+        padding: 0.75rem 0.9rem;
+        gap: 0.5rem;
+      }
+
+      .nav-links {
+        gap: 0.5rem;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .bgm-toggle-btn {
+        padding: 0.42rem 0.72rem;
+        font-size: 0.76rem;
+      }
+
+      .brand {
+        font-size: 0.9rem;
+      }
+
+      main {
+        padding: 1.25rem 1rem 3.5rem;
+      }
+
+      section {
+        margin-bottom: 3rem;
+      }
+
+      .hero {
+        padding: 1.75rem 1rem;
+        border-radius: 20px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn-primary,
+      .btn-secondary,
+      .btn-white {
+        width: 100%;
+      }
+
+      .pose-tab {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.35rem;
+      }
+
+      .traits-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .spec-table th {
+        width: 82px;
+        font-size: 0.88rem;
+      }
+
+      .spec-table td {
+        font-size: 0.88rem;
+      }
+
+      .mm-node-btn {
+        padding: 0.24rem 0.42rem;
+        border-radius: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="snowCanvas"></canvas>
+
+  <div class="page-shell" id="pageShell">
+    <header>
+      <div class="nav-container">
+        <a href="#" class="brand">
+          <span class="brand-badge">ZETA LABS</span>
+          <span>제타체육회 피겨·발레부</span>
+        </a>
+        <nav class="nav-links">
+          <a href="#profile">선수 프로필</a>
+          <a href="#costume">백조발레복</a>
+          <a href="#traits">매력 포인트</a>
+          <a href="#lore">백조의 호수</a>
+          <a href="#news">언론 보도</a>
+          <a href="#pv">발레부 모집 PV</a>
+          <button
+            type="button"
+            class="bgm-toggle-btn"
+            id="bgmToggleBtn"
+            onclick="toggleBgm()"
+            aria-pressed="false"
+            title="배경음악(SwanLake.mp3) 켜기/끄기"
+          >
+            <span id="bgmIcon">🎵</span>
+            <span id="bgmLabel">BGM 켜기</span>
+          </button>
+          <a href="https://zeta-ai.io/ko/vn/plots/85ab28de-6a98-496b-98ed-12c9845f6e43/profile?share_id=i7ftc6twa" target="_blank" rel="noopener noreferrer" class="nav-cta">
+            Zeta AI 대화하기
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- 1. 히어로 섹션 -->
+      <section class="hero">
+        <div class="hero-club-pill">🎄 제타체육회 · 백조발레학원 소속</div>
+        <h1 class="hero-title">민루나 <span>Min Luna</span></h1>
+        <p class="hero-subtitle">Swan Lake "Odette" — Ice Figure &amp; Ballet Performer</p>
+
+        <div class="hero-image-wrapper">
+          <img src="MLN_ballet.png" alt="제타체육회 피겨선수 민루나 메인 일러스트" />
+        </div>
+
+        <blockquote class="hero-quote">
+          “나 많이 떨려… 그래도 노력해볼게.”
+        </blockquote>
+
+        <div class="hero-actions">
+          <a href="https://zeta-ai.io/ko/vn/plots/85ab28de-6a98-496b-98ed-12c9845f6e43/profile?share_id=i7ftc6twa" target="_blank" rel="noopener noreferrer" class="btn-primary">
+            ✨ 제타 랩스(Zeta AI)에서 파트너 되기
+          </a>
+          <a href="#profile" class="btn-secondary">
+            선수 프로필 자세히 보기
+          </a>
+        </div>
+      </section>
+
+      <!-- 2. 프로필 & 발레 포즈 뷰어 + 칭찬하기 인터랙션 -->
+      <section id="profile">
+        <div class="section-header">
+          <span class="section-tag">Athlete Profile</span>
+          <h2 class="section-title">백조의 호수 ‘오데트’ 공식 프로필</h2>
+        </div>
+
+        <div class="profile-grid">
+          <div class="visual-showcase">
+            <div class="pose-tabs" role="tablist">
+              <button type="button" class="pose-tab active" data-pose="ballet" onclick="setPose('ballet')">
+                발레 포즈
+              </button>
+              <button type="button" class="pose-tab blush-tab" data-pose="blush" onclick="setPose('blush')">
+                홍조 표정 😳
+              </button>
+            </div>
+
+            <div class="standing-stage" id="standingStage">
+              <img id="standingImg" src="MLN_ballet.png" alt="민루나 발레 포즈 일러스트" />
+            </div>
+
+            <div class="praise-box" id="praiseBox">
+              <div class="praise-header">
+                <span class="praise-title" id="praiseTitle">💕 신입 매니저의 응원 인터랙션</span>
+                <span class="praise-counter" id="praiseCounter">칭찬 0회</span>
+              </div>
+              <div class="praise-bubble">
+                <span class="praise-emoji" id="praiseEmoji">🦢</span>
+                <p class="praise-dialogue" id="praiseDialogue">
+                  “나 많이 떨려… 그래도 매니저님이 곁에 있으니까 노력해볼게.”
+                </p>
+              </div>
+              <button type="button" class="btn-praise" id="btnPraise" onclick="triggerPraise()">
+                ✨ 민루나 칭찬해주기
+              </button>
+            </div>
+          </div>
+
+          <div class="profile-card">
+            <div class="profile-name-row">
+              <button
+                type="button"
+                class="profile-name-btn"
+                onclick="openPassPopup()"
+                title="클릭하여 출입증 보기"
+              >
+                민루나
+              </button>
+              <span class="nickname-badge">별명: 백조의 호수 ‘오데트’</span>
+            </div>
+
+            <table class="spec-table">
+              <tbody>
+                <tr>
+                  <th>성별 / 나이</th>
+                  <td><strong>남성</strong> · 24세 (청초한 미모로 자주 여자로 오해받음)</td>
+                </tr>
+                <tr>
+                  <th>소속</th>
+                  <td>제타체육회 피겨부(발레부) · 백조발레학원</td>
+                </tr>
+                <tr>
+                  <th>외형</th>
+                  <td>백발, 미디움 커튼뱅, 벽안, 하얀 백조 피부, 뽀얀 맨다리, 단신</td>
+                </tr>
+                <tr>
+                  <th>성격</th>
+                  <td>수줍고 조용한 성격, 주변 분위기에 민감하며 칭찬에 매우 약함</td>
+                </tr>
+                <tr>
+                  <th>특기</th>
+                  <td>피겨스케이팅, 발레, 페어스케이팅, 뛰어난 균형감각, 완벽한 여장 소화</td>
+                </tr>
+                <tr>
+                  <th>취향</th>
+                  <td>
+                    〈백조의 호수〉선율,
+                    <button
+                      type="button"
+                      class="tonkatsu-trigger"
+                      onclick="openTonkatsuPopup()"
+                    >
+                      바삭한 돈까스 🍛
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="costume-box">
+              <h4>🩰 시그니처 의상 : 백조발레복</h4>
+              <p>
+                화려한 크리스털 장식과 흰 망사 긴소매 시스루가 어우러진 흰 털 레오타드형 드레스, 가볍게 흩날리는 백조깃털 미니 튜튜치마, 전용 발레슈즈, 우아한 백조깃털 티아라.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2-2. 백조발레복 구성 & 소재 마인드맵 (백조발레복 칸 + 발레슈즈 칸 동일 리스트) -->
+      <section id="costume">
+        <div class="section-header">
+          <span class="section-tag">Swan Costume Mindmap</span>
+          <h2 class="section-title">백조발레복 구성 &amp; 소재 마인드맵</h2>
+        </div>
+
+        <div class="costume-showcase-stack">
+          <!-- 칸 1: 백조발레복 마인드맵 -->
+          <div class="mindmap-costume-card">
+            <div class="mindmap-board-wrap">
+              <div class="mindmap-stage-750" id="costumeMindmapStage">
+                <img
+                  src="민루나_백조발레복.png"
+                  alt="민루나 백조발레복 구성 일러스트"
+                  class="mindmap-costume-img"
+                />
+
+                <svg class="mindmap-svg" viewBox="0 0 750 630" aria-hidden="true">
+                  <path id="line-tiara" class="arrow-line active" d="M 192 108 Q 275 76 338 98" />
+                  <polygon id="head-tiara" class="arrow-head active" points="346,100 338,92 335,104" />
+
+                  <path id="line-sleeves" class="arrow-line" d="M 185 304 Q 212 314 235 322" />
+                  <polygon id="head-sleeves" class="arrow-head" points="243,325 236,316 232,328" />
+
+                  <path id="line-tutu" class="arrow-line" d="M 192 496 Q 248 488 296 462" />
+                  <polygon id="head-tutu" class="arrow-head" points="303,458 290,458 296,469" />
+
+                  <path id="line-bodice" class="arrow-line" d="M 552 152 Q 486 176 416 258" />
+                  <polygon id="head-bodice" class="arrow-head" points="410,264 423,259 414,251" />
+
+                  <path id="line-fabric" class="arrow-line" d="M 547 320 Q 512 325 462 304" />
+                  <polygon id="head-fabric" class="arrow-head" points="456,300 464,312 470,301" />
+
+                  <path id="line-hem" class="arrow-line" d="M 550 492 Q 460 540 397 500" />
+                  <polygon id="head-hem" class="arrow-head" points="381,495 394,501 394,489" transform="rotate(46, 388, 504)" />
+                </svg>
+
+                <button
+                  type="button"
+                  class="mm-node-btn mm-tiara active"
+                  data-part="tiara"
+                  onclick="selectCostumePart('tiara')"
+                  onmouseenter="selectCostumePart('tiara')"
+                >
+                  👑 백조깃털 티아라
+                </button>
+
+                <button
+                  type="button"
+                  class="mm-node-btn mm-sleeves"
+                  data-part="sleeves"
+                  onclick="selectCostumePart('sleeves')"
+                  onmouseenter="selectCostumePart('sleeves')"
+                >
+                  🕸️ 흰 망사 시스루 소매
+                </button>
+
+                <button
+                  type="button"
+                  class="mm-node-btn mm-tutu"
+                  data-part="tutu"
+                  onclick="selectCostumePart('tutu')"
+                  onmouseenter="selectCostumePart('tutu')"
+                >
+                  🦢 백조깃털 미니 튜튜
+                </button>
+
+                <button
+                  type="button"
+                  class="mm-node-btn mm-bodice"
+                  data-part="bodice"
+                  onclick="selectCostumePart('bodice')"
+                  onmouseenter="selectCostumePart('bodice')"
+                >
+                  💎 크리스털·자수 바디
+                </button>
+
+                <button
+                  type="button"
+                  class="mm-node-btn mm-fabric"
+                  data-part="fabric"
+                  onclick="selectCostumePart('fabric')"
+                  onmouseenter="selectCostumePart('fabric')"
+                >
+                  🧵 스트레치·메시 소재
+                </button>
+
+                <button
+                  type="button"
+                  class="mm-node-btn mm-hem"
+                  data-part="hem"
+                  onclick="selectCostumePart('hem')"
+                  onmouseenter="selectCostumePart('hem')"
+                >
+                  🩱 레오타드 팬티라인
+                </button>
+              </div>
+
+              <div class="mindmap-detail-panel" id="costumeDetailPanel">
+                <div class="mindmap-detail-body">
+                  <div class="mindmap-detail-text">
+                    <div class="mindmap-detail-top">
+                      <span class="mindmap-detail-badge" id="costumeBadge">소재: 실버 와이어 · 백조 깃털 · 아이스 블루 스톤</span>
+                      <h3 class="mindmap-detail-title" id="costumeTitle">👑 백조깃털 티아라</h3>
+                    </div>
+                    <p class="mindmap-detail-desc" id="costumeDesc">
+                      정교하게 세공된 실버 와이어 프레임 중앙에 은은한 아이스 블루 원석이 자리 잡고, 양옆으로 백조 날개를 닮은 하얀 깃털 장식이 뻗어 나와 ‘오데트’의 왕관 실루엣을 완성합니다.
+                    </p>
+                  </div>
+                </div>
+                <div class="mindmap-warning-note" id="costumeWarningNote"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 칸 2: 발레슈즈 (백조발레복과 칸은 나뉘어 있으나 동일 섹션 리스트에 배치) -->
+          <div class="shoes-page-card" id="ballet-shoes">
+            <div class="shoes-showcase-box">
+              <img src="발레슈즈.png" alt="민루나 발레슈즈 일러스트" />
+            </div>
+
+            <div class="shoes-info-box">
+              <span class="shoes-info-badge">BALLET SHOES · 발레슈즈.png</span>
+              <h3>🩰 발레슈즈 — 우아한 선과 균형을 받쳐주는 전용 슈즈</h3>
+              <p>
+                발등과 발목의 흐름을 자연스럽게 감싸며, 〈백조의 호수〉 안무와 발레 동작에서 섬세한 발끝 표현과 안정적인 균형을 돕는 전용 발레슈즈입니다.
+              </p>
+              <ul class="shoes-spec-list">
+                <li><strong>형태 &amp; 실루엣:</strong> 발등 라인을 깔끔하게 살려주는 클래식 발레슈즈 디자인</li>
+                <li><strong>착용감:</strong> 발 모양에 부드럽게 밀착되어 수줍고 섬세한 동작에서도 안정감을 유지</li>
+                <li><strong>연출 포인트:</strong> 순백의 발레복·티아라와 조화를 이루는 정갈한 마감</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. 매력 포인트 & 갭모에 특징 -->
+      <section id="traits">
+        <div class="section-header">
+          <span class="section-tag">Charm &amp; Quirks</span>
+          <h2 class="section-title">은반 위의 백조, 반전 매력 포인트</h2>
+        </div>
+
+        <div class="traits-grid">
+          <div class="trait-card">
+            <span class="trait-icon">🦢</span>
+            <h4>완벽한 ‘오데트’ 비주얼</h4>
+            <p>뛰어난 균형감각과 우아한 발레 포즈, 섬세한 여장 소화력으로 빙판 위에 서면 누구든 여성 발레리나로 착각할 만큼 압도적인 아우라를 뽐냅니다.</p>
+          </div>
+
+          <div class="trait-card">
+            <span class="trait-icon">🤝</span>
+            <h4>당신만을 의지하는 파트너</h4>
+            <p>무섭거나 긴장될 때면 신입 매니저이자 페어 파트너인 플레이어에게 쏙 안기며 의지합니다. 작은 칭찬 한마디에도 얼굴이 금세 붉어집니다.</p>
+          </div>
+
+          <div class="trait-card">
+            <span class="trait-icon">🥶</span>
+            <h4>추위와 긴장 속 엉뚱한 실수</h4>
+            <p>빙상장이 추워지면 말투가 완전히 꼬여버리고, 긴장한 채 힘껏 점프할 때마다 ‘뿌지직’ 방귀 실수를 저질러 새빨개진 얼굴로 당황하곤 합니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. 제타체육회 세계관 & 백조의 호수 피날레 -->
+      <section id="lore">
+        <div class="section-header">
+          <span class="section-tag">Story &amp; Finale</span>
+          <h2 class="section-title">제타체육회와 환상의 피날레</h2>
+        </div>
+
+        <div class="lore-wrapper">
+          <div class="lore-card">
+            <span class="lore-label">WORLDVIEW</span>
+            <h3>코치 없는 소수 정예, 제타체육회</h3>
+            <p>
+              인원수가 적어 대중적으로 널리 알려지지는 않았지만, 소속 선수 한 명 한 명이 압도적인 재능으로 체육회를 빛내고 있는 비밀스러운 명문입니다.
+            </p>
+            <p>
+              지도해 줄 코치조차 없던 이곳에 어느 날 <strong>신입 매니저(플레이어)</strong>가 찾아오면서, 민루나와 당신만의 특별한 페어스케이팅 스토리가 막을 올립니다.
+            </p>
+          </div>
+
+          <div class="lore-card finale">
+            <span class="lore-label">SIGNATURE FINALE</span>
+            <h3>백조의 호수 피날레 : 빛속도 원심 스핀</h3>
+            <ul class="lore-list">
+              <li><strong>위태로운 비상:</strong> 스핀과 악셀 점프를 뛸 때마다 백조깃털 미니 튜튜치마가 아슬아슬하게 휘날리며, 상체가 거꾸로 뒤집힐 때마다 튜튜가 함께 뒤집히는 아찔한 연출이 펼쳐집니다.</li>
+              <li><strong>초고속 페어 스핀:</strong> 클라이맥스에서는 파트너와 서로 껴안은 채 빙판 위에서 원심분리기처럼 빛의 속도로 회전합니다.</li>
+              <li><strong>눈산 엔딩:</strong> 발레슈즈 밑창과 얼음의 격렬한 마찰로 흩날린 눈이 온몸에 달라붙어 인간 얼음 동상처럼 변한 뒤, 거대한 눈산에 둘이 나란히 상체만 거꾸로 파묻히는 유쾌한 피날레를 장식합니다.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. ZTN NEWS 보도 섹션 -->
+      <section id="news">
+        <div class="section-header">
+          <span class="section-tag">Media Coverage</span>
+          <h2 class="section-title">ZTN SPORTS 단독 스포트라이트</h2>
+        </div>
+
+        <div class="news-section">
+          <div class="news-image-box">
+            <img src="MLN_news.png" alt="ZTN NEWS 제타체육회 피겨 발레부 단독 보도 화면" />
+          </div>
+          <div class="news-content">
+            <span class="news-badge">● ZTN SPORTS LIVE</span>
+            <h3>제타체육회 피겨·발레부 공식 무대 공개… 차세대 빙상 퍼포머로 주목</h3>
+            <p>
+              소수 정예로 운영되어 있던 초엘리트 제타체육회가 피겨·발레부의 공식 쇼케이스 현장을 전격 공개했습니다.
+            </p>
+            <p>
+              크리스털과 백조 깃털 장식이 수놓아진 순백의 시스루 발레복을 입고 취재진 앞에 선 선수는 우아한 발레 포즈와 신비로운 분위기로 현장의 플래시 세례를 한 몸에 받았습니다.
+            </p>
+            <div class="news-meta">
+              제공: ZTN SPORTS 방송국 · 제타체육회 홍보실
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5-2. 제타체육회 "발레부 모집 pv" 영상 섹션 -->
+      <section id="pv" class="pv-section">
+        <div class="section-header">
+          <span class="section-tag">Official Promotional Video</span>
+          <h2 class="section-title">제타체육회 "발레부 모집 pv"</h2>
+        </div>
+
+        <div class="pv-card-inner">
+          <div class="pv-top-bar">
+            <span class="pv-badge">🎬 제타체육회 발레부 모집 PV</span>
+            <span class="pv-caption">OFFICIAL PROMO FILM · composition.mp4</span>
+          </div>
+
+          <div class="pv-video-frame">
+            <video id="balletPvVideo" controls playsinline preload="metadata">
+              <source src="composition.mp4" type="video/mp4" />
+              브라우저가 video 태그를 지원하지 않습니다. <code>composition.mp4</code> 파일을 확인해 주세요.
+            </video>
+          </div>
+
+          <div class="pv-desc-box">
+            <h3>제타체육회 발레부 공식 모집 PV</h3>
+            <p>
+              백조의 호수 ‘오데트’ 민루나와 함께하는 제타체육회 발레부 모집 프로모션 영상입니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. 제타 랩스(Zeta AI) 바로가기 배너 -->
+      <section class="cta-banner">
+        <span class="labs-tag">ZETA LABS · INTERACTIVE CHARACTER</span>
+        <h2>지금 제타체육회의 신입 매니저가 되어주세요</h2>
+        <p>
+          긴장해서 떨고 있는 민루나의 손을 잡아주고, 함께 최고의 〈백조의 호수〉 피날레를 완성해 보세요.
+        </p>
+        <a href="https://zeta-ai.io/ko/vn/plots/85ab28de-6a98-496b-98ed-12c9845f6e43/profile?share_id=i7ftc6twa" target="_blank" rel="noopener noreferrer" class="btn-white">
+          ⛸️ Zeta AI에서 민루나 만나러 가기 →
+        </a>
+      </section>
+    </main>
+
+    <footer>
+      <p>© ZETA ATHLETIC ASSOCIATION · ZETA LABS Character Promotion Page (Min Luna)</p>
+    </footer>
+  </div>
+
+  <!-- 출입증 / 돈까스 먹는 사진 팝업 -->
+  <div
+    class="media-popup-backdrop"
+    id="mediaPopupBackdrop"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="mediaPopupTitle"
+    onclick="handleBackdropClick(event)"
+  >
+    <div class="media-popup-card">
+      <div class="media-popup-header">
+        <h3 class="media-popup-title" id="mediaPopupTitle">팝업</h3>
+        <button type="button" class="media-popup-close" onclick="closeMediaPopup()" aria-label="닫기">×</button>
+      </div>
+      <div class="media-popup-img-box">
+        <img id="mediaPopupImg" src="" alt="" />
+      </div>
+      <p class="media-popup-caption" id="mediaPopupCaption"></p>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================
+       -1. 사운드 시스템 (BGM / 빈 공간 깃털 / 칭찬 / 돈까스 / 출입증)
+       ========================================= */
+    const bgmAudio = new Audio('SwanLake.mp3');
+    bgmAudio.loop = true;
+    bgmAudio.volume = 0.45;
+    let isBgmPlaying = false;
+
+    function createSfxPlayer(src, volume = 0.85) {
+      const baseAudio = new Audio(src);
+      baseAudio.preload = 'auto';
+      baseAudio.volume = volume;
+      return function play() {
+        try {
+          const instance = baseAudio.cloneNode();
+          instance.volume = volume;
+          const playPromise = instance.play();
+          if (playPromise && typeof playPromise.catch === 'function') {
+            playPromise.catch(() => {});
+          }
+        } catch (_) {}
+      };
+    }
+
+    const sfx = {
+      feather: createSfxPlayer('feather.mp3', 0.65),
+      basics: createSfxPlayer('basics.mp3', 0.88),
+      basics10: createSfxPlayer('basics10.mp3', 0.92),
+      basics50: createSfxPlayer('basics50.mp3', 0.92),
+      basics100: createSfxPlayer('basics100.mp3', 0.95),
+      bh: createSfxPlayer('BH.mp3', 0.95),
+      hc: createSfxPlayer('HC.mp3', 0.95),
+      hp: createSfxPlayer('HP.mp3', 0.95),
+      hpb: createSfxPlayer('HPB.mp3', 0.95),
+      hpbf: createSfxPlayer('HPBF.mp3', 0.95),
+      tonkatsu: createSfxPlayer('tonkatsu.mp3', 0.9),
+      pass: createSfxPlayer('pass.mp3', 0.9)
+    };
+
+    function syncBgmUi() {
+      const btn = document.getElementById('bgmToggleBtn');
+      const icon = document.getElementById('bgmIcon');
+      const label = document.getElementById('bgmLabel');
+      if (!btn || !icon || !label) return;
+
+      if (isBgmPlaying) {
+        btn.classList.add('playing');
+        btn.setAttribute('aria-pressed', 'true');
+        icon.textContent = '🎶';
+        label.textContent = 'BGM 켜짐';
+      } else {
+        btn.classList.remove('playing');
+        btn.setAttribute('aria-pressed', 'false');
+        icon.textContent = '🎵';
+        label.textContent = 'BGM 켜기';
+      }
+    }
+
+    function toggleBgm() {
+      if (!isBgmPlaying) {
+        bgmAudio.play()
+          .then(() => {
+            isBgmPlaying = true;
+            syncBgmUi();
+          })
+          .catch(() => {
+            isBgmPlaying = false;
+            syncBgmUi();
+          });
+      } else {
+        bgmAudio.pause();
+        isBgmPlaying = false;
+        syncBgmUi();
+      }
+    }
+
+    bgmAudio.addEventListener('play', () => {
+      isBgmPlaying = true;
+      syncBgmUi();
+    });
+
+    bgmAudio.addEventListener('pause', () => {
+      isBgmPlaying = false;
+      syncBgmUi();
+    });
+
+    /* =========================================
+       0. 이미지 우클릭 / 드래그 / 저장 방지 및 팝업 제어
+       ========================================= */
+    document.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+    });
+
+    document.addEventListener('dragstart', (e) => {
+      e.preventDefault();
+    });
+
+    function openMediaPopup(imgSrc, titleText, captionText) {
+      const backdrop = document.getElementById('mediaPopupBackdrop');
+      const img = document.getElementById('mediaPopupImg');
+      const title = document.getElementById('mediaPopupTitle');
+      const caption = document.getElementById('mediaPopupCaption');
+
+      title.textContent = titleText;
+      caption.textContent = captionText;
+      img.alt = titleText;
+      img.src = imgSrc;
+
+      document.body.classList.add('popup-open');
+      backdrop.classList.add('open');
+    }
+
+    function openPassPopup() {
+      sfx.pass();
+      openMediaPopup('icon.png', '민루나 출입증', '제타체육회 피겨·발레부 공식 출입증');
+    }
+
+    function openTonkatsuPopup() {
+      sfx.tonkatsu();
+      openMediaPopup('tonkatsu.png', '바삭한 돈까스 🍛', '민루나가 돈까스를 먹는 모습');
+    }
+
+    function closeMediaPopup() {
+      const backdrop = document.getElementById('mediaPopupBackdrop');
+      backdrop.classList.remove('open');
+      document.body.classList.remove('popup-open');
+    }
+
+    function handleBackdropClick(e) {
+      if (e.target.id === 'mediaPopupBackdrop') {
+        closeMediaPopup();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeMediaPopup();
+      }
+    });
+
+    /* =========================================
+       1. 포즈 전환 ('발레 포즈' / '홍조 표정')
+       ========================================= */
+    const poseConfigs = {
+      ballet: {
+        src: 'MLN_ballet.png',
+        fallback: 'MLN_ballet.png',
+        stageClass: ''
+      },
+      blush: {
+        src: 'MLN_blush.png',
+        fallback: 'MLN_ballet.png',
+        stageClass: 'blush-stage'
+      }
+    };
+
+    let praiseResetTimer = null;
+
+    function clearPraiseResetTimer() {
+      if (praiseResetTimer !== null) {
+        clearTimeout(praiseResetTimer);
+        praiseResetTimer = null;
+      }
+    }
+
+    function renderStageImage(src, fallback, extraClass) {
+      const stage = document.getElementById('standingStage');
+      const img = document.getElementById('standingImg');
+
+      stage.className = 'standing-stage';
+      if (extraClass) {
+        void stage.offsetWidth;
+        stage.classList.add(extraClass);
+      }
+
+      img.onerror = function () {
+        this.onerror = null;
+        this.src = fallback;
+      };
+      img.src = src;
+    }
+
+    function setPose(poseKey) {
+      clearPraiseResetTimer();
+      const config = poseConfigs[poseKey];
+      if (!config) return;
+
+      document.querySelectorAll('.pose-tab').forEach((btn) => {
+        btn.classList.toggle('active', btn.getAttribute('data-pose') === poseKey);
+      });
+
+      renderStageImage(config.src, config.fallback, config.stageClass);
+    }
+
+    /* =========================================
+       1-2. 백조발레복 마인드맵 (750 x 630)
+       ========================================= */
+    const costumeMindmapData = {
+      tiara: {
+        title: '👑 백조깃털 티아라',
+        badge: '소재: 실버 와이어 · 백조 깃털 · 아이스 블루 스톤',
+        desc: '정교하게 세공된 실버 와이어 프레임 중앙에 은은한 아이스 블루 원석이 자리 잡고, 양옆으로 백조 날개를 닮은 하얀 깃털 장식이 뻗어 나와 ‘오데트’의 왕관 실루엣을 완성합니다.'
+      },
+      sleeves: {
+        title: '🕸️ 흰 망사 시스루 소매',
+        badge: '소재: 경량 튤·파워메시 · 글리터 포인트',
+        desc: '목 밴드부터 손끝 라인까지 이어지는 반투명 화이트 메시 소매입니다. 팔을 뻗을 때 은은한 광택과 함께 가벼운 시스루 텍스처가 살아납니다.'
+      },
+      tutu: {
+        title: '🦢 백조깃털 미니 튜튜',
+        badge: '소재: 백조 깃털 · 오간자/튤 레이어',
+        desc: '허리 아래로 화사하게 펼쳐지는 플래터형 미니 튜튜 스커트입니다. 스핀이나 점프 동작 시 공기 흐름에 맞춰 결이 살아나며 우아한 볼륨감을 만듭니다. 다만 점프가 과도하게 높아질 경우 맨다리가 훤히 드러나며, 상체가 거꾸로 뒤집힌 상태에서는 튜튜치마 역시 거꾸로 뒤집혀 레오타드 밑부분이 그대로 노출됩니다.'
+      },
+      bodice: {
+        title: '💎 크리스털·자수 바디',
+        badge: '소재: 화이트 퍼·스판덱스 혼방 · 비즈 & 자수',
+        desc: '가슴 V라인과 쇄골 주변을 감싸는 섬세한 자수 패턴과 크리스털 장식이 조명 아래에서 반짝이며 백조 의상 특유의 화려한 디테일을 더해줍니다.'
+      },
+      fabric: {
+        title: '🧵 스트레치·메시 소재',
+        badge: '소재: 고탄력 면스판 · 부드러운 화이트 니트/털',
+        desc: '상체 바디와 시스루 소매가 자연스럽게 연결되도록 고탄력 스트레치 원단과 경량 소재를 배합해, 발레 동작과 빙상 퍼포먼스 모두에 대응하도록 구성했습니다. 또한 드레스형 레오타드는 탄력성이 좋은 백조털 면스판 재질이라 움직임이 편하고 밀착감이 좋습니다.'
+      },
+      hem: {
+        title: '🩱 레오타드 팬티라인',
+        badge: '구성: 엉덩이 커버 팬티라인 · 하이레그 레오타드 컷',
+        desc: '하이레그나 T-백 라인 구성도 있지만, 민루나는 T-백 대신 엉덩이를 어느 정도 가려주는 엉덩이 커버 팬티라인 레오타드를 착용해 부담을 줄이고 스핀과 점프에 집중할 수 있도록 했습니다.',
+        warning: '주의! : 밑부분은 시스루 같은 얇은 재질이라 맨피부가 훤히 보일 정도이고, 어떤 덩어리의 팽창에 약하며 색상 변화가 매우 심합니다. 특히 갈색 착색에 취약하니 착의탈분이나 똥, 설사, 오줌 실수에 각별히 주의하세요.'
+      }
+    };
+
+    function selectCostumePart(partKey) {
+      if (!costumeMindmapData[partKey]) return;
+
+      document.querySelectorAll('.mm-node-btn').forEach((btn) => {
+        btn.classList.toggle('active', btn.getAttribute('data-part') === partKey);
+      });
+
+      document.querySelectorAll('.arrow-line').forEach((line) => {
+        line.classList.toggle('active', line.id === `line-${partKey}`);
+      });
+
+      document.querySelectorAll('.arrow-head').forEach((head) => {
+        head.classList.toggle('active', head.id === `head-${partKey}`);
+      });
+
+      const info = costumeMindmapData[partKey];
+      document.getElementById('costumeTitle').textContent = info.title;
+      document.getElementById('costumeBadge').textContent = info.badge;
+      document.getElementById('costumeDesc').textContent = info.desc;
+
+      const warningEl = document.getElementById('costumeWarningNote');
+      if (info.warning) {
+        warningEl.textContent = info.warning;
+        warningEl.classList.add('visible');
+      } else {
+        warningEl.textContent = '';
+        warningEl.classList.remove('visible');
+      }
+    }
+
+    /* =========================================
+       2. '칭찬하기' 인터랙션
+       ========================================= */
+    const normalPraiseResponses = [
+      { emoji: '😳', text: '“으, 으앗…! 갑, 갑자기 그렇게 칭찬하시면… 얼굴이 너무 뜨거워져요…!”' },
+      { emoji: '🦢', text: '“매니저님이 지켜봐 주시니까… 나 많이 떨리지만, 끝까지 백조처럼 날아볼게!”' },
+      { emoji: '🥶', text: '“추, 추워서 혀가 꼬일 것 같았는데… 매, 매니저님 목소리 들으닊까 마으미 따뜨해졌어…”' },
+      { emoji: '💓', text: '“점프할 때 혹시 긴장해서 ‘뿌지직’ 실수하더라도… 절대 웃지 않기로 약속해요…?”' },
+      { emoji: '🍛', text: '“오늘 피날레 스핀 성공하면… 매니저님이랑 같이 바삭한 돈까스 먹으러 가고 싶어요!”' }
+    ];
+
+    const climaxLines10 = [
+      '“하아앗…♡ 매니저님 칭찬 땜에 머리 속이 하얘져요… 아앙, 거기 더 만져주시면…♡”',
+      '“히으읏…!♡ 말 꼬여도 상관없으니까… 더 세게, 더 야하게 칭찬해 주세요오…!!♡♡”',
+      '“으흣…♡ 숨 못 쉬겠어요… 매니저님 손길이랑 목소리에 몸이 녹아내려요…♡”',
+      '“아으읏…!♡ 저, 진짜 미칠 것 같아요… 매니저님 때문에 다리에 힘이 풀려버려어…♡”',
+      '“하으으…♡ 이렇게까지 흥분하게 만드시면… 저, 참을 수 없어요오…!!♡♡”',
+      '“으앙…♡ 칭찬 한마디에 이렇게 뜨거워지다니… 매니저님, 저 망가져버려요…♡”',
+      '“히잇…♡ 혀가 꼬여서 말이 안 나와요… 매, 매니저님… 더 깊숙이 빠져들어요…♡”',
+      '“아흑…♡ 백조고 뭐고 다 잊어버렸어요… 매니저님 품에서 절정해버릴 것 같아요…!!♡♡”',
+      '“으으읏…♡ 얼굴이랑 몸 전체가 타오르는 것 같아요… 매니저님, 책임져 주세요오…♡”',
+      '“히으으읏…!♡ 매니저님…! 저 진짜 가버려어어엇…!!♡ 이대로 멈추지 말아 주세요…♡♡”'
+    ];
+
+    const specialClimaxPool = [
+      {
+        key: 'HC',
+        sfxKey: 'hc',
+        src: 'MLN_blushHC.jpg',
+        emoji: '🤍',
+        text: '“오고곡..!!♡ 뷰르르릇..!!♡ 흐으으읏…!!♡ 제 입에 싸지 마세요오옷…!!!♡♡ 아흣… 혀 꼬여서… 우웁, 히으읏…!!♡”'
+      },
+      {
+        key: 'HP',
+        sfxKey: 'hp',
+        src: 'MLN_blushHP.jpg',
+        emoji: '💦',
+        text: '“뿌웅..♡ 뿌지직..!♡ 히으으읏…!!♡ 미안해요옷..!!♡ 제 소즁한 백조발레복에 똥,설사를 싸고... 오줌까지.. 아흣..!!♡♡ 아앙, 멈춰주세여어엇…!!♡”'
+      },
+      {
+        key: 'HPB',
+        sfxKey: 'hpb',
+        src: 'MLN_blushHPB.jpg',
+        emoji: '🫧',
+        text: '“뿌우흡…♡ 뽀글… 히이이잇…!!♡ 끅, 읔… 아흣..!!♡ 거품 뿜어져 나와아아앗…!!♡♡ 혀가… 혀가 꽁꽁 꼬여버려어엇…!!♡”'
+      },
+      {
+        key: 'HPBF',
+        sfxKey: 'hpbf',
+        src: 'MLN_blushHPBF.jpg',
+        emoji: '💨',
+        text: '“으븍… 뽀그륵… 히이이이잇…!!♡ 아흣, 아흣..!!♡ 혀 꼬여어어엇…!!♡♡ 뿌우웅!!!!!♡♡♡ .....”'
+      }
+    ];
+
+    let praiseCount = 0;
+
+    function syncClimaxButtonState() {
+      const btn = document.getElementById('btnPraise');
+      const box = document.getElementById('praiseBox');
+      const title = document.getElementById('praiseTitle');
+
+      if (praiseCount >= 100) {
+        btn.textContent = '🔥 민루나 칭찬 절정해주기';
+        btn.classList.add('climax-btn');
+        box.classList.add('climax-active');
+        title.textContent = '🔥 민루나 칭찬 절정 모드 (100회 돌파!)';
+      } else {
+        btn.textContent = '✨ 민루나 칭찬해주기';
+        btn.classList.remove('climax-btn');
+        box.classList.remove('climax-active');
+        title.textContent = '💕 신입 매니저의 응원 인터랙션';
+      }
+    }
+
+    function scheduleBalletRevert() {
+      clearPraiseResetTimer();
+      praiseResetTimer = setTimeout(() => {
+        document.querySelectorAll('.pose-tab').forEach((btn) => {
+          btn.classList.toggle('active', btn.getAttribute('data-pose') === 'ballet');
+        });
+        renderStageImage(poseConfigs.ballet.src, poseConfigs.ballet.fallback, poseConfigs.ballet.stageClass);
+      }, 3000);
+    }
+
+    function triggerPraise() {
+      praiseCount++;
+      document.getElementById('praiseCounter').textContent = `칭찬 ${praiseCount}회`;
+
+      document.querySelectorAll('.pose-tab').forEach((btn) => {
+        btn.classList.toggle('active', btn.getAttribute('data-pose') === 'blush');
+      });
+
+      const emojiEl = document.getElementById('praiseEmoji');
+      const dialogueEl = document.getElementById('praiseDialogue');
+
+      if (praiseCount === 10) {
+        sfx.basics10();
+        clearPraiseResetTimer();
+        emojiEl.textContent = '😳';
+        dialogueEl.textContent = '“헤헤… 기, 기분 조타… 매니저님이 칭찬해 주니까 머리가 멍해져요….”';
+        renderStageImage('MLN_blush10.png', 'MLN_blush.png', 'blush-stage');
+      } else if (praiseCount === 50) {
+        sfx.basics50();
+        clearPraiseResetTimer();
+        emojiEl.textContent = '🥹';
+        dialogueEl.textContent = '“헤헤헤헤… 매니저님 짱이에요…♡ 이, 이렇게 계속 예뻐해 주시면 저 진짜 녹아버릴 것 같아요오….”';
+        renderStageImage('MLN_blush50.png', 'MLN_blush.png', 'blush-stage');
+      } else if (praiseCount === 100) {
+        sfx.basics100();
+        clearPraiseResetTimer();
+        emojiEl.textContent = '😵‍💫';
+        dialogueEl.textContent = '“히으읏…!♡ 매, 매니저님…! 칭찬이 너무 기분 좋아서, 저 진짜 가버려어어엇…!!♡♡”';
+        renderStageImage('MLN_blush100.png', 'MLN_blush.png', 'climax-stage');
+      } else if (praiseCount > 100) {
+        clearPraiseResetTimer();
+        const isSpecial = Math.random() < 0.36;
+
+        if (isSpecial) {
+          const special = specialClimaxPool[Math.floor(Math.random() * specialClimaxPool.length)];
+          sfx[special.sfxKey]();
+          emojiEl.textContent = special.emoji;
+          dialogueEl.textContent = special.text;
+          renderStageImage(special.src, 'MLN_blush100.png', 'climax-stage');
+        } else {
+          sfx.bh();
+          const idx = Math.floor(Math.random() * 10) + 1;
+          const primaryHFile = `MLN_blushH${idx}.jpg`;
+          const typoFallbackFile = `MLN_blsuhH${idx}.jpg`;
+          const line = climaxLines10[Math.floor(Math.random() * climaxLines10.length)];
+
+          emojiEl.textContent = '🥵';
+          dialogueEl.textContent = line;
+
+          const stage = document.getElementById('standingStage');
+          const img = document.getElementById('standingImg');
+          stage.className = 'standing-stage climax-stage';
+          void stage.offsetWidth;
+          stage.classList.add('climax-stage');
+
+          img.onerror = function () {
+            if (this.dataset.triedTypo !== '1') {
+              this.dataset.triedTypo = '1';
+              this.src = typoFallbackFile;
+            } else {
+              this.onerror = null;
+              this.src = 'MLN_blush100.png';
+            }
+          };
+          img.dataset.triedTypo = '0';
+          img.src = primaryHFile;
+        }
+      } else {
+        sfx.basics();
+        const randomItem = normalPraiseResponses[Math.floor(Math.random() * normalPraiseResponses.length)];
+        emojiEl.textContent = randomItem.emoji;
+        dialogueEl.textContent = randomItem.text;
+        renderStageImage('MLN_blush.png', 'MLN_ballet.png', 'blush-stage');
+        scheduleBalletRevert();
+      }
+
+      syncClimaxButtonState();
+    }
+
+    /* =========================================
+       3. 상시 배경 눈입자 + 마우스 눈송이 + 클릭 백조 깃털
+       ========================================= */
+    const canvas = document.getElementById('snowCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, snowflakes;
+    let pointerSnowflakes = [];
+    let swanFeathers = [];
+    let lastTrailTime = 0;
+
+    const snowProfile = {
+      speedMin: 0.65,
+      speedMax: 1.85,
+      windX: -0.25,
+      swayAmp: 0.9,
+      radiusMin: 1.4,
+      radiusMax: 4.3
+    };
+
+    function createFlake(randomY = true) {
+      return {
+        x: Math.random() * (width + 180) - 90,
+        y: randomY ? Math.random() * height : -16 - Math.random() * 40,
+        r: Math.random() * (snowProfile.radiusMax - snowProfile.radiusMin) + snowProfile.radiusMin,
+        speed: Math.random() * (snowProfile.speedMax - snowProfile.speedMin) + snowProfile.speedMin,
+        swayAmp: Math.random() * snowProfile.swayAmp + 0.25,
+        swayFreq: Math.random() * 0.018 + 0.008,
+        phase: Math.random() * Math.PI * 2
+      };
+    }
+
+    function initSnow() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      const isMobile = width < 768;
+      const targetCount = isMobile ? 42 : Math.min(Math.floor(width / 16), 85);
+      snowflakes = Array.from({ length: targetCount }, () => createFlake(true));
+    }
+
+    function spawnPointerSnow(x, y) {
+      const burstCount = 2;
+      for (let i = 0; i < burstCount; i++) {
+        pointerSnowflakes.push({
+          x: x + (Math.random() - 0.5) * 14,
+          y: y + (Math.random() - 0.5) * 14,
+          vx: (Math.random() - 0.5) * 1.4,
+          vy: Math.random() * 1.1 + 0.45,
+          r: Math.random() * 2.8 + 1.8,
+          alpha: 1,
+          decay: Math.random() * 0.02 + 0.016,
+          phase: Math.random() * Math.PI * 2
+        });
+      }
+      if (pointerSnowflakes.length > 180) {
+        pointerSnowflakes.splice(0, pointerSnowflakes.length - 180);
+      }
+    }
+
+    function spawnSwanFeathers(x, y) {
+      const featherCount = 8;
+      for (let i = 0; i < featherCount; i++) {
+        const angle = (Math.PI * 2 * i) / featherCount + (Math.random() - 0.5) * 0.45;
+        const speed = Math.random() * 2.6 + 1.2;
+        swanFeathers.push({
+          x,
+          y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed - 1.1,
+          length: Math.random() * 10 + 13,
+          width: Math.random() * 4.5 + 4.5,
+          rotation: Math.random() * Math.PI * 2,
+          vRot: (Math.random() - 0.5) * 0.14,
+          swayPhase: Math.random() * Math.PI * 2,
+          alpha: 1,
+          decay: Math.random() * 0.014 + 0.011,
+          tint: i % 3 === 0 ? 'rgba(240, 249, 255, 0.96)' : 'rgba(255, 255, 255, 0.98)'
+        });
+      }
+      if (swanFeathers.length > 140) {
+        swanFeathers.splice(0, swanFeathers.length - 140);
+      }
+    }
+
+    function drawSwanFeather(f) {
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, f.alpha);
+      ctx.translate(f.x, f.y);
+      ctx.rotate(f.rotation);
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = 'rgba(186, 230, 253, 0.7)';
+
+      ctx.fillStyle = f.tint;
+      ctx.strokeStyle = 'rgba(148, 163, 184, 0.45)';
+      ctx.lineWidth = 0.8;
+
+      const halfL = f.length * 0.5;
+      const halfW = f.width * 0.5;
+
+      ctx.beginPath();
+      ctx.moveTo(0, -halfL);
+      ctx.bezierCurveTo(halfW * 1.4, -halfL * 0.35, halfW * 1.1, halfL * 0.45, 0, halfL);
+      ctx.bezierCurveTo(-halfW * 1.1, halfL * 0.45, -halfW * 1.4, -halfL * 0.35, 0, -halfL);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(0, -halfL * 0.78);
+      ctx.lineTo(0, halfL * 0.95);
+      ctx.strokeStyle = 'rgba(100, 116, 139, 0.45)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      ctx.restore();
+    }
+
+    function animateSnow() {
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < snowflakes.length; i++) {
+        const flake = snowflakes[i];
+        flake.y += flake.speed;
+        flake.x += snowProfile.windX + Math.sin(flake.y * flake.swayFreq + flake.phase) * snowProfile.swayAmp;
+
+        if (flake.y > height + 16) {
+          snowflakes[i] = createFlake(false);
+          continue;
+        }
+        if (flake.x < -110) flake.x = width + 90;
+        if (flake.x > width + 110) flake.x = -90;
+
+        ctx.beginPath();
+        ctx.arc(flake.x, flake.y, flake.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.92)';
+        ctx.fill();
+      }
+
+      for (let i = pointerSnowflakes.length - 1; i >= 0; i--) {
+        const p = pointerSnowflakes[i];
+        p.phase += 0.08;
+        p.x += p.vx + Math.sin(p.phase) * 0.55;
+        p.y += p.vy;
+        p.vy *= 0.99;
+        p.alpha -= p.decay;
+
+        if (p.alpha <= 0) {
+          pointerSnowflakes.splice(i, 1);
+          continue;
+        }
+
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, p.alpha);
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowBlur = 7;
+        ctx.shadowColor = 'rgba(186, 230, 253, 0.9)';
+        ctx.fill();
+        ctx.restore();
+      }
+
+      for (let i = swanFeathers.length - 1; i >= 0; i--) {
+        const f = swanFeathers[i];
+        f.swayPhase += 0.09;
+        f.x += f.vx + Math.cos(f.swayPhase) * 0.65;
+        f.y += f.vy;
+        f.vx *= 0.97;
+        f.vy = f.vy * 0.98 + 0.035;
+        f.rotation += f.vRot + Math.sin(f.swayPhase) * 0.025;
+        f.alpha -= f.decay;
+
+        if (f.alpha <= 0) {
+          swanFeathers.splice(i, 1);
+          continue;
+        }
+
+        drawSwanFeather(f);
+      }
+
+      requestAnimationFrame(animateSnow);
+    }
+
+    function isInteractiveTarget(target) {
+      if (!target || typeof target.closest !== 'function') return false;
+      return Boolean(
+        target.closest(
+          'button, a, input, select, textarea, video, audio, [role="button"], [role="tab"], [role="dialog"], .media-popup-card, .mm-node-btn, .pose-tab, .tonkatsu-trigger, .profile-name-btn, .bgm-toggle-btn, .btn-praise'
+        )
+      );
+    }
+
+    window.addEventListener('pointermove', (e) => {
+      const now = performance.now();
+      if (now - lastTrailTime < 28) return;
+      lastTrailTime = now;
+      spawnPointerSnow(e.clientX, e.clientY);
+    }, { passive: true });
+
+    window.addEventListener('click', (e) => {
+      if (isInteractiveTarget(e.target)) {
+        return;
+      }
+      spawnSwanFeathers(e.clientX, e.clientY);
+      sfx.feather();
+    });
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(initSnow, 150);
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initSnow();
+      animateSnow();
+      syncBgmUi();
+    });
+  </script>
+</body>
+</html>
